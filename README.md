@@ -1,4 +1,5 @@
 # sidemenu
+<<<<<<< HEAD
 侧滑菜单练习项目
 
 ### 入口页（entry）
@@ -55,3 +56,6 @@
 
 ### 电影页（movie）
 ![这里写图片描述](https://github.com/DaiHuaXieHuaKai/sidemenu/screenshots/movie.png)
+=======
+侧滑菜单练习项目，页面所涉及到的数据均为静态数据。该demo主要用于页面设计，部分功能还未完善。
+>>>>>>> 06243aae4a6b5a32d0100531de1d040f016b81ca
