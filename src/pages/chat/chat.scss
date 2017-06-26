@@ -1,0 +1,46 @@
+page-chat {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-list {
+            ion-item {
+                min-height: 6rem!important;
+                line-height: 6rem!important;
+                background: transparent!important;
+                border-top: 0!important;
+                border-bottom: #ffffff solid .1rem!important;
+                ion-avatar {
+                    span {
+                        font-size: 8rem!important;
+                        position: absolute;
+                        top: -5rem;
+                        left: 6rem;
+                    }
+                    img {
+                        height: 5rem!important;
+                        width: 5rem!important;
+                    }
+                }
+                .item-inner {
+                    border-bottom: 0!important;
+                }
+                h2.name {
+                    color: #f98000!important;
+                }
+                p.content {
+                    color: #000000!important;
+                }
+                p.time {
+                    color: #ffffff!important;
+                }
+                button {
+                    ion-icon {
+                        font-size: 2rem!important;
+                    }
+                }
+            }
+        }
+    }
+}

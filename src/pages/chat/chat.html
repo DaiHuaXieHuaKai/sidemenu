@@ -1,0 +1,25 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>会话</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let new of news">
+            <ion-avatar item-left>
+                <img src="{{new.send_image}}">
+            </ion-avatar>
+            <h2 class="name">{{new.send_name}}</h2>
+            <p class="content">{{new.send_content}}</p>
+            <p class="time">{{new.send_time}}</p>
+            <button ion-button clear item-right (click)="detail(new)" color="light">
+               <ion-icon name="arrow-dropright-outline"></ion-icon>
+            </button>
+
+        </ion-item>
+    </ion-list>
+</ion-content>

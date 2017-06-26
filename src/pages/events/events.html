@@ -1,0 +1,37 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>日历事件</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="calendar">
+        <div class="date">
+            {{currentDate|date:"yyyy-MM-dd"}}
+        </div>
+        <ion-row class="week">
+            <ion-col *ngFor="let week of weeks" text-center>{{week.name}}</ion-col>
+        </ion-row>
+        <ion-row class="day">
+            <ion-col *ngFor="let day of days" text-center>
+                <button ion-button small outline *ngIf="day.nowMonth!=nowMonth&&day.name!=nowDay" color="four" (click)="addEvents(day)">{{day.name}}</button>
+                <button ion-button small outline *ngIf="day.nowMonth==nowMonth&&day.name!=nowDay" color="dark" (click)="addEvents(day)">{{day.name}}</button>
+                <button ion-button small outline *ngIf="day.name==nowDay" color="primary" (click)="addEvents(day)">{{day.name}}</button>
+            </ion-col>
+        </ion-row>
+        <ion-row class="footer">
+            <ion-col text-left><button ion-button clear (click)="previous()"><ion-icon name="arrow-dropleft"></ion-icon>上一月</button></ion-col>
+            <ion-col text-right><button ion-button clear (click)="next()">下一月<ion-icon name="arrow-dropright"></ion-icon></button></ion-col>
+        </ion-row>
+    </div>
+    <ion-list>
+        <ion-list-header *ngIf="events.length>0">事件列表</ion-list-header>
+        <ion-item *ngFor="let event of events">
+            <h5>{{event.time | date:'yyyy-MM-dd'}}</h5>
+            <p>{{event.content}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

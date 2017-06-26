@@ -1,0 +1,95 @@
+page-message {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-grid {
+            ion-row {
+                ion-col.head {
+                    max-width: 6rem!important;
+                    .img_head {
+                        img {
+                            height: 5rem!important;
+                            width: 5rem!important;
+                            border-radius: 50%;
+                        }
+                    }
+                }
+                ion-col.container {
+                    .content {
+                        .arrow {
+                            width: 0;
+                            height: 0;
+                            border-top: .8rem solid transparent;
+                            border-bottom: .8rem solid transparent;
+                            border-right: .8rem solid #0b71a5;
+                            position: absolute;
+                            top: 3.5rem;
+                            left: .8rem;
+                        }
+                        .arrowright {
+                            width: 0;
+                            height: 0;
+                            border-top: .8rem solid transparent;
+                            border-bottom: .8rem solid transparent;
+                            border-left: .8rem solid #0b71a5;
+                            position: absolute;
+                            top: 3.5rem;
+                            right: -.2rem;
+                        }
+                        .username {
+                            color: #f98000;
+                        }
+                        .message {
+                            margin-top: .5rem;
+                            margin-left: 1rem;
+                            min-height: 4rem;
+                            padding: .5rem;
+                            max-width: 100%;
+                            display: inline-block;
+                            background: #0b71a5;
+                            color: #ffffff;
+                            border: .1rem solid #989898;
+                            border-radius: 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    ion-footer {
+        ion-row.input_btn {
+            .col {
+                padding: 0 .5rem!important;
+            }
+            ion-col.input {
+                ion-input {
+                    border-radius: .5rem!important;
+                    background: #ffffff;
+                    height: 3rem!important;
+                }
+            }
+            ion-col.btn {
+                max-width: 5.5rem!important;
+                button {
+                    border-radius: .5rem!important;
+                    padding: 1rem!important;
+                    font-size: 1.2rem;
+                    min-height: 3rem!important;
+                    height: 3rem!important;
+                }
+            }
+        }
+        ion-row.function {
+            ion-col {
+                button {
+                    height: 2.5rem!important;
+                    ion-icon {
+                        font-size: 2.8rem!important;
+                    }
+                }
+            }
+        }
+    }
+}

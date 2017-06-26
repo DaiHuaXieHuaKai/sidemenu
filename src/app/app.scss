@@ -1,0 +1,107 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+//设置标题栏背景颜色
+.toolbar-background-ios {
+    background: #b7ebf9;
+}
+
+//设置标题颜色
+.toolbar-title-ios {
+    color: #0b71a5;
+}
+
+//设置标题boder
+.header-ios .toolbar-ios:last-child .toolbar-background-ios {
+    border-width: 0;
+}
+
+//设置placeholder颜色
+input::-webkit-input-placeholder {
+    color: #dddddd!important;
+}
+
+input:-moz-placeholder {
+    /* Firefox 18- */
+    color: #dddddd!important;
+}
+
+input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #dddddd!important;
+}
+
+input:-ms-input-placeholder {
+    color: #dddddd!important;
+}
+
+//设置注册和登录的样式
+@mixin btn {
+    border-radius: 1.5rem!important;
+    height: 3.6rem;
+    opacity: 0.6;
+    letter-spacing: .5rem;
+}
+
+//自定义图标 用户名和密码
+@font-face {
+    font-family: 'Ionicons';
+    src: url('../assets/iconfonts/userpassword/iconfont.eot');
+    src: url('../assets/iconfonts/userpassword/iconfont.eot?#iefix') format('embedded-opentype'), url('../assets/iconfonts/userpassword/iconfont.woff') format('woff'), url('../assets/iconfonts/userpassword/iconfont.ttf') format('truetype'), url('../assets/iconfonts/userpassword/iconfont.svg#iconfont') format('svg');
+}
+
+.icon {
+    font-family: "Ionicons" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ion-ios-username:before {
+    content: '\e617'
+}
+
+.ion-md-username:before {
+    content: '\e617'
+}
+
+.ion-ios-username-outline:before {
+    content: '\e617'
+}
+
+.ion-ios-password:before {
+    content: '\e61e'
+}
+
+.ion-ios-password-outline:before {
+    content: '\e61e'
+}
+
+.ion-md-password:before {
+    content: '\e61e'
+}
+
+.ion-ios-verify:before {
+    content: '\e62c'
+}
+
+.ion-ios-verify-outline:before {
+    content: '\e62c'
+}
+
+.ion-md-verify:before {
+    content: '\e62c'
+}

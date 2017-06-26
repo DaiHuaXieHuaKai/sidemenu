@@ -1,0 +1,70 @@
+<style>
+    #menu {}
+    
+    .content {
+        background: rgba(22, 81, 112, 0.8);
+    }
+    
+    .info {
+        width: 100%;
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+    }
+    
+    .info_img img {
+        width: 12rem;
+        height: 12rem;
+        border-radius: 12rem;
+        border: .2rem solid #ffffff;
+    }
+    
+    .info_username {
+        font-size: 1.8rem;
+        color: #ffffff;
+    }
+    
+    .info_tip {
+        font-size: 1.4rem;
+        color: #f98000;
+    }
+    
+    .menu_item {
+        width: 100%;
+        height: 5rem;
+        line-height: 5rem;
+        margin-left: 10rem;
+        font-size: 1.6rem;
+        color: #ffffff;
+    }
+    
+    .logout {
+        width: 100%;
+        height: 5rem;
+        line-height: 5rem;
+        margin-left: 10rem;
+        font-size: 1.6rem;
+        color: #ffffff;
+        margin-top: 2rem;
+    }
+</style>
+<ion-menu id="menu" [content]="content">
+    <ion-content class="content">
+        <div class="info" text-center>
+            <div class="info_img">
+                <img src="assets/images/o.jpg" alt="">
+            </div>
+            <div class="info_username">Dai Hua Xie Hua Kai</div>
+            <div class="info_tip">四川.成都</div>
+        </div>
+
+        <div class="menu_item" menuClose *ngFor="let p of pages" (click)="openPage(p)">
+            {{p.title}}
+        </div>
+        <div class="logout" menuClose (click)="logout()">
+            退出登录
+        </div>
+    </ion-content>
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

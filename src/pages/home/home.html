@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button>
+      <ion-icon name="settings"></ion-icon>
+    </button>
+        </ion-buttons>
+        <ion-title>首页</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-searchbar [(ngModel)]="inputValue" placeholder="请输入搜索内容" [showCancelButton]="false" [animated]=true (ionInput)="onInput($event)">
+    </ion-searchbar>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col col-4 text-center *ngFor="let menu of menus">
+                <div class="col" (click)="into(menu.id)">
+                    <img ion-content src="{{menu.icon}}" alt="">
+                    <ion-label color="light" no-margin>{{menu.text}}</ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

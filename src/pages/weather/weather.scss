@@ -1,0 +1,102 @@
+page-weather {
+    ion-header {
+        ion-row {
+            background: #b7ebf9;
+            ion-col.today {
+                font-size: 1.6rem;
+                color: #f98000;
+                line-height: 3rem!important;
+            }
+            ion-col {
+                line-height: 2rem;
+                button {
+                    margin: 0!important;
+                    padding: 0!important;
+                    height: 2rem!important;
+                    ion-icon {
+                        padding: 0 .5rem;
+                    }
+                }
+            }
+        }
+    }
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        div.weather_img {
+            width: 100%;
+            text-align: center;
+            img {
+                width: 16rem;
+                height: 16rem;
+            }
+        }
+        ion-row.weather_c {
+            ion-col.low {
+                padding-top: 2.5rem;
+                padding-right: 1rem;
+                color: #ffffff;
+                font-size: 4rem;
+            }
+            ion-col.high {
+                padding-left: 1rem;
+                color: #f98000;
+                font-size: 6rem;
+            }
+        }
+        .area_line {
+            margin-top: 2rem;
+            .line {
+                border: .1rem solid #ffffff;
+            }
+            .area {
+                text-align: center;
+                width: 10rem;
+                height: 3.5rem;
+                background: #ffffff;
+                color: #0b70a5;
+                line-height: 3.5rem;
+                border-radius: 1rem;
+                margin-left: 36%;
+                margin-top: -1.8rem;
+            }
+        }
+        ion-row.other {
+            margin-top: 4rem;
+            padding: 0 3rem;
+            ion-col.other_item {
+                height: 10rem;
+                border: #ffffff solid .1rem;
+                border-radius: 1rem;
+                margin: 0 1rem;
+                .item_img {
+                    img {
+                        width: 100%;
+                        height: 4.5rem;
+                    }
+                }
+                .item_c {
+                    color: #ffffff;
+                    font-size: 1.8rem;
+                    text-align: center;
+                }
+                .item_location {
+                    font-size: 1.2rem;
+                    color: #ffffff;
+                    text-align: center;
+                }
+            }
+        }
+        ion-searchbar {
+            margin-top: 4rem;
+            background: none!important;
+            border-bottom: 0!important;
+            border-top: 0!important;
+            .searchbar-input {
+                border-radius: 3rem!important;
+                color: #0b71a5!important;
+            }
+        }
+    }
+}

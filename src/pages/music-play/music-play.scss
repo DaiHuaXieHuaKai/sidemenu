@@ -1,0 +1,58 @@
+page-music-play {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        div.name {
+            width: 100%;
+            text-align: center;
+            color: #0b71a5;
+            font-size: 2.4rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        ion-row.btns {
+            ion-col {
+                button {
+                    height: 3rem!important;
+                    width: 3rem!important;
+                    border-radius: 3rem!important;
+                }
+            }
+        }
+        div.img {
+            width: 100%;
+            text-align: center;
+            img {
+                height: 25rem;
+                width: 25rem;
+                border-radius: 25rem;
+            }
+        }
+        ion-item {
+            background: transparent!important;
+            border: 0!important;
+            .item-inner {
+                border: 0!important;
+            }
+            ion-range {
+                .range-knob {
+                    height: 1rem!important;
+                    width: 1rem!important;
+                    top: 1.6rem!important;
+                    left: 1.6rem!important;
+                }
+            }
+        }
+        div.play_btns {
+            width: 100%;
+            text-align: center;
+            button {
+                height: 5rem!important;
+                width: 5rem!important;
+                border-radius: 5rem!important;
+            }
+        }
+    }
+}

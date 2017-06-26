@@ -1,0 +1,13 @@
+<ion-list>
+    <ion-item>
+        {{addDate.date| date:'yyyy-MM-dd'}}
+    </ion-item>
+    <ion-item>
+        <ion-textarea [(ngModel)]="eventContent" placeholder="添加事件"></ion-textarea>
+    </ion-item>
+    <div>
+        <button ion-button (click)="add()" small>
+        确认添加
+      </button>
+    </div>
+</ion-list>

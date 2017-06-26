@@ -1,0 +1,64 @@
+page-events {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        div.calendar {
+            border-radius: 1rem;
+            margin: 1rem!important;
+            height: 70%;
+            background: #ffffff;
+            div.date {
+                text-align: center;
+                color: #0b71a5;
+                font-size: 2.4rem;
+                height: 10%;
+            }
+            ion-row.week,
+            ion-row.day {
+                ion-col {
+                    max-width: 14%!important;
+                    min-width: 14%!important;
+                }
+            }
+            ion-row.week {
+                height: 10%;
+                color: #0b71a5;
+                font-weight: bold;
+            }
+            ion-row.day {
+                height: 70%;
+                ion-col {
+                    padding: 0!important;
+                    button {
+                        height: 2.5rem!important;
+                        width: 2.5rem!important;
+                        border-radius: 2.5rem!important;
+                    }
+                }
+            }
+            ion-row.footer {
+                height: 10%;
+                ion-col {
+                    button {
+                        font-size: 1.4rem!important;
+                        height: 100%!important;
+                        ion-icon {
+                            font-size: 2.4rem!important;
+                        }
+                    }
+                }
+            }
+        }
+        ion-list {
+            ion-list-header {
+                background: #ffffff!important;
+                font-size: 1.6rem!important;
+            }
+            ion-item {
+                background-color: #b7ebf9!important;
+            }
+        }
+    }
+}

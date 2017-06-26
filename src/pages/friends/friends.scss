@@ -1,0 +1,152 @@
+page-friends {
+    font-family: $Font-Family;
+    ion-header {
+        ion-toolbar {
+            min-height: 6rem!important;
+            ion-segment {
+                background: #f8f8f8!important;
+                ion-segment-button {
+                    color: #0b71a5!important;
+                    width: 100%!important;
+                    height: 4rem!important;
+                    max-width: 100%!important;
+                    line-height: 4rem!important;
+                    border: 0!important;
+                    border-right: #0b71a5 solid .1rem!important;
+                    ion-icon {
+                        font-size: 2.5rem!important;
+                        line-height: 4rem!important;
+                    }
+                    span {
+                        padding-left: .5rem;
+                        line-height: 4rem;
+                        position: relative;
+                        top: -.5rem;
+                    }
+                }
+                ion-segment-button:last-child {
+                    border: 0!important;
+                }
+                ion-segment-button.segment-activated {
+                    background: #f8f8f8!important;
+                    color: #f98000!important;
+                }
+            }
+        }
+        .total {
+            background: #0b71a5;
+            height: 3rem;
+            line-height: 3rem;
+            span {
+                color: #ffffff;
+            }
+        }
+    }
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-list.lists {
+            ion-item-sliding {
+                background: transparent!important;
+                ion-item {
+                    min-height: 6rem!important;
+                    line-height: 6rem!important;
+                    background: #f8f8f8!important;
+                    ion-avatar {
+                        span {
+                            font-size: 8rem!important;
+                            position: absolute;
+                            top: -5rem;
+                            left: 6rem;
+                        }
+                        img {
+                            height: 5rem!important;
+                            width: 5rem!important;
+                        }
+                    }
+                    h2 {
+                        color: #f98000!important;
+                    }
+                    span {
+                        color: #0b71a5;
+                        font-size: 1.2rem!important;
+                    }
+                }
+                ion-item-options {
+                    button {
+                        background: transparent!important;
+                        ion-icon {
+                            font-size: 4rem!important;
+                            color: #f98000;
+                            padding-bottom: 0!important;
+                        }
+                    }
+                }
+            }
+        }
+        ion-list.friends {
+            ion-item {
+                min-height: 6rem!important;
+                line-height: 6rem!important;
+                background: #f8f8f8!important;
+                ion-avatar {
+                    span {
+                        font-size: 8rem!important;
+                        position: absolute;
+                        top: -5rem;
+                        left: 6rem;
+                    }
+                    img {
+                        height: 5rem!important;
+                        width: 5rem!important;
+                    }
+                }
+                h2 {
+                    color: #f98000!important;
+                }
+                button {
+                    ion-icon {
+                        font-size: 2rem!important;
+                    }
+                }
+            }
+        }
+        ion-list.news {
+            ion-item {
+                min-height: 6rem!important;
+                line-height: 6rem!important;
+                background: #f8f8f8!important;
+                ion-avatar {
+                    span {
+                        font-size: 8rem!important;
+                        position: absolute;
+                        top: -5rem;
+                        left: 6rem;
+                    }
+                    img {
+                        height: 5rem!important;
+                        width: 5rem!important;
+                    }
+                }
+                h2 {
+                    color: #f98000!important;
+                }
+                ion-note {
+                    font-size: 1.2rem!important;
+                    margin: 0!important;
+                    margin-top: -1rem!important;
+                    align-self: flex-start;
+                }
+                button {
+                    position: absolute;
+                    right: 0;
+                    top: 2.8rem;
+                    ion-badge {
+                        font-size: 1rem!important;
+                    }
+                }
+            }
+        }
+    }
+}

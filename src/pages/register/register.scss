@@ -1,0 +1,50 @@
+     page-register {
+         font-family: $Font-Family;
+         ion-content {
+             background-image: url('../assets/images/background.png');
+             background-size: 100%;
+             background-repeat: no-repeat;
+             ion-list {
+                 margin-top: 25rem!important;
+                 padding-left: 3rem;
+                 padding-right: 3rem;
+                 ion-item {
+                     border-top: 0!important;
+                     border-bottom: 0!important;
+                     .verify_btn {
+                         margin: 0!important;
+                         padding: 0!important;
+                     }
+                     ion-label {
+                         ion-icon {
+                             font-size: 3rem!important;
+                             color: #ffffff;
+                         }
+                     }
+                     ion-input {
+                         color: #ffffff;
+                     }
+                 }
+                 ion-item.item-ios {
+                     background-color: transparent;
+                 }
+                 ion-item .item-inner {
+                     border-bottom: .1rem solid #dedede!important;
+                 }
+             }
+             .btns {
+                 padding-left: 4rem;
+                 padding-right: 4rem;
+                 .login_btn {
+                     padding-bottom: 1rem;
+                 }
+                 .login_btn button {
+                     @include btn;
+                     color: #ffffff;
+                 }
+             }
+             .forget {
+                 text-align: center;
+             }
+         }
+     }

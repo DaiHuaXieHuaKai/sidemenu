@@ -1,0 +1,29 @@
+page-home {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-searchbar {
+            background: none!important;
+            border-bottom: 0!important;
+            border-top: 0!important;
+            .searchbar-input {
+                border-radius: 3rem!important;
+                color: #0b71a5!important;
+            }
+        }
+        ion-grid {
+            ion-row {
+                ion-col {
+                    padding: 2rem!important;
+                    img {
+                        height: 6rem!important;
+                        width: 6rem!important;
+                        border-radius: 6rem!important;
+                    }
+                }
+            }
+        }
+    }
+}

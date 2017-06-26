@@ -1,0 +1,108 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>好友</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="selected">
+            <ion-segment-button value="add" (ionSelect)="selectedSegment(0)">
+                <ion-icon name="person-add-outline"></ion-icon>
+                <span>推荐好友</span>
+            </ion-segment-button>
+            <ion-segment-button value="lists" (ionSelect)="selectedSegment(1)">
+                <ion-icon name="star-outline"></ion-icon>
+                <span>好友列表</span>
+            </ion-segment-button>
+            <ion-segment-button value="message" (ionSelect)="selectedSegment(2)">
+                <ion-icon name="mail-outline"></ion-icon>
+                <span>消息</span>
+            </ion-segment-button>
+            <ion-segment-button value="search" (ionSelect)="selectedSegment(3)">
+                <ion-icon name="search-outline"></ion-icon>
+                <span>搜索</span>
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+    <div class="total" text-center>
+        <span>好友人数：800</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>在线人数：366</span>
+    </div>
+
+</ion-header>
+
+
+<ion-content>
+    <!--好友列表    -->
+    <ion-list class="lists" *ngIf="activePage==0">
+        <ion-item-sliding #slidingItem *ngFor="let friend of friends">
+            <ion-item>
+                <ion-avatar item-left>
+                    <span *ngIf="friend.status==0" style="color:#989898!important;">.</span>
+                    <span *ngIf="friend.status==1" style="color:#02ff00!important;">.</span>
+                    <span *ngIf="friend.status==2" style="color:#f98000!important;">.</span>
+                    <img src="{{friend.image}}">
+                </ion-avatar>
+                <h2>{{friend.name}}</h2>
+                <p>{{friend.location}}</p>
+                <span item-end>
+                    右滑操作
+                </span>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button (click)="add(slidingItem,friend)">
+                  <ion-icon name="add-outline"></ion-icon>
+                </button>
+                <button ion-button (click)="call(slidingItem,friend)">
+                  <ion-icon name="call-outline"></ion-icon>
+                </button>
+                <button ion-button (click)="mail(slidingItem,friend)">
+                 <ion-icon name="mail-outline"></ion-icon>
+               </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <!--推荐好友    -->
+    <ion-list class="friends" *ngIf="activePage==1">
+        <ion-item *ngFor="let friend of friends">
+            <ion-avatar item-left>
+                <span *ngIf="friend.status==0" style="color:#989898!important;">.</span>
+                <span *ngIf="friend.status==1" style="color:#02ff00!important;">.</span>
+                <span *ngIf="friend.status==2" style="color:#f98000!important;">.</span>
+                <img src="{{friend.image}}">
+            </ion-avatar>
+            <h2>{{friend.name}}</h2>
+            <p>{{friend.location}}</p>
+            <button ion-button clear item-right (click)="addFriend(friend)">
+               <ion-icon name="add-circle-outline"></ion-icon>
+            </button>
+
+        </ion-item>
+    </ion-list>
+
+    <!--消息列表    -->
+    <ion-list class="news" *ngIf="activePage==2">
+        <ion-item-sliding #slidingItemNews *ngFor="let new of news">
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="{{new.send_image}}">
+                </ion-avatar>
+                <h2>{{new.send_name}}</h2>
+                <p>{{new.send_content}}</p>
+                <ion-note item-end>{{new.send_time}}</ion-note>
+                <button ion-button clear *ngIf="new.news_num>0">
+                <ion-badge item-end>{{new.news_num}}</ion-badge>
+                </button>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button color="four" (click)="totop(slidingItemNews,new)">
+                  置顶
+                </button>
+                <button ion-button color="third" (click)="hasread(slidingItemNews,new)">
+                  标为已读
+                </button>
+                <button ion-button color="danger" (click)="delete(slidingItemNews,new)">
+                 删除
+               </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>

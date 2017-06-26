@@ -1,0 +1,24 @@
+page-movie {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-row {
+            ion-col {
+                ion-icon {
+                    font-size: 6rem!important;
+                    position: absolute;
+                    top: 5rem;
+                    left: 40%;
+                }
+                img {
+                    height: 15rem;
+                }
+                p {
+                    margin: 0!important;
+                }
+            }
+        }
+    }
+}

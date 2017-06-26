@@ -1,0 +1,19 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>我的视频</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-row>
+        <ion-col col-4 *ngFor="let movie of movies" text-center>
+            <ion-icon name="play-outline" color="light"></ion-icon>
+            <img src="{{movie.cover_img}}" alt="">
+            <p>{{movie.title}}</p>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

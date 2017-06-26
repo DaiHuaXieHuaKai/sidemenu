@@ -1,0 +1,24 @@
+page-article {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-card {
+            ion-item {
+                h3 {
+                    font-size: 1.6rem!important;
+                    font-weight: 500!important;
+                    white-space: normal!important;
+                }
+                p {
+                    font-size: 1.2rem!important;
+                }
+            }
+            img {
+                height: 20rem;
+                width: 100%;
+            }
+        }
+    }
+}

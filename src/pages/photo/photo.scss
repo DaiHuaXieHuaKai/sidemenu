@@ -1,0 +1,39 @@
+page-photo {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-row {
+            ion-col.major,
+            ion-col.repeat {
+                padding: 1rem 2rem 1rem 2rem!important;
+                img {
+                    width: 100%;
+                    height: 15rem;
+                    border-radius: 1rem;
+                }
+                div {
+                    width: 3rem;
+                    height: 3rem;
+                    background: black;
+                    color: #ffffff;
+                    border-radius: 3rem;
+                    position: absolute;
+                    right: 2rem;
+                    text-align: center;
+                    line-height: 3rem;
+                }
+            }
+            ion-col.repeat:nth-child(odd) {
+                padding-left: 1rem!important;
+            }
+            ion-col.repeat:nth-child(even) {
+                padding-right: 1rem!important;
+                div {
+                    right: 1rem!important;
+                }
+            }
+        }
+    }
+}

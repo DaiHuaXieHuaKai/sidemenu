@@ -1,0 +1,15 @@
+page-setting {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/homebg.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        ion-list {
+            margin: 0!important;
+            margin-top: 1rem!important;
+        }
+        ion-row {
+            margin-top: 1rem;
+        }
+    }
+}

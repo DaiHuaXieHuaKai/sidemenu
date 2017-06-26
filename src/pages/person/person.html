@@ -1,0 +1,53 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>个人</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="head" text-center>
+        <div class="head_img">
+            <img src="assets/images/o.jpg" alt="">
+        </div>
+        <div class="username">Dai Hua Xie Hua Kai</div>
+        <div class="location">
+            <ion-icon name="locate">
+            </ion-icon>
+            四川.成都
+        </div>
+    </div>
+    <ion-list no-margin>
+        <ion-item>
+            <img src="assets/images/menu/friends.png" alt="" item-left> 朋友
+        </ion-item>
+        <ion-item>
+            <img src="assets/images/menu/email.png" alt="" item-left> 消息
+            <ion-badge color="light" item-right>20</ion-badge>
+        </ion-item>
+        <ion-item>
+            <img src="assets/images/menu/chat.png" alt="" item-left> 聊天
+            <ion-badge color="light" item-right>10</ion-badge>
+        </ion-item>
+        <ion-item>
+            <img src="assets/images/menu/photo.png" alt="" item-left> 拍照
+        </ion-item>
+        <ion-item>
+            <img src="assets/images/menu/music.png" alt="" item-left> 音乐
+        </ion-item>
+        <ion-item>
+            <img src="assets/images/menu/movie.png" alt="" item-left> 电影
+        </ion-item>
+    </ion-list>
+    <div class="btns">
+        <div class="edit_btn">
+            <button ion-button full color="light" (click)="edit()">编辑信息</button>
+        </div>
+        <div class="logout_btn">
+            <button ion-button outline full color="light" (click)="logout()">退出登录</button>
+        </div>
+    </div>
+
+</ion-content>

@@ -1,0 +1,25 @@
+page-entry {
+    font-family: $Font-Family;
+    ion-content {
+        background-image: url('../assets/images/background.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        .btns {
+            padding-left: 4rem;
+            padding-right: 4rem;
+            padding-bottom: 2rem;
+            margin-top: 30rem;
+            .login_btn {
+                padding-bottom: 1rem;
+            }
+            .login_btn button {
+                @include btn;
+                color: #0b71a5;
+            }
+            .register_btn button {
+                @include btn;
+                color: #ffffff;
+            }
+        }
+    }
+}

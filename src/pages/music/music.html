@@ -1,0 +1,49 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>音乐</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let music of musics;let i=index" (click)="select(music)">
+            <ion-row>
+                <ion-col col-auto class="index">
+                    <div text-center>
+                        {{i+1}}
+                    </div>
+                </ion-col>
+                <ion-col class="info">
+                    <h5>{{music.songname}}</h5>
+                    <p>{{music.singername}}-{{music.songname}}</p>
+                </ion-col>
+                <ion-col col-auto class="duration">
+                    {{music.seconds | secondstominute}}
+                </ion-col>
+            </ion-row>
+        </ion-item>
+    </ion-list>
+
+</ion-content>
+
+<ion-footer *ngIf="musics.length>0">
+    <ion-toolbar>
+        <ion-row>
+            <ion-col col-auto>
+                <img src="{{selected.albumpic_small}}" alt="">
+            </ion-col>
+            <ion-col>
+                <h5>{{selected.songname}}</h5>
+                <p>{{selected.singername}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{selected.seconds | secondstominute}}</p>
+            </ion-col>
+            <ion-col text-right col-auto>
+                <button ion-button icon-only outline (click)="play(selected)">
+                 <ion-icon name="play"></ion-icon>
+             </button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,43 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>注册</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>
+                <ion-icon name="username"></ion-icon>
+            </ion-label>
+            <ion-input type="text" placeholder="用户名"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <ion-icon name="verify"></ion-icon>
+            </ion-label>
+            <ion-input type="number" placeholder="验证码"></ion-input>
+            <button class="verify_btn" [disabled]="verifyFlag" ion-button item-right item-content clear color="primary" (click)="verify()">{{verifyString}}</button>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>
+                <ion-icon name="password"></ion-icon>
+            </ion-label>
+            <ion-input type="password" placeholder="密码"></ion-input>
+        </ion-item>
+
+    </ion-list>
+    <div class="btns">
+        <div class="login_btn">
+            <button ion-button full color="primary" (click)="register()">注册</button>
+        </div>
+    </div>
+    <div class="forget">
+        <button ion-button clear no-padding no-margin color="light" (click)="forget()">忘记密码？</button>
+    </div>
+</ion-content>

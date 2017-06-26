@@ -1,0 +1,35 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>音乐播放</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <div class="name">
+        {{music.singername}}-{{music.songname}}
+    </div>
+    <ion-row class="btns">
+        <ion-col text-center><button ion-button icon-only color="light"><ion-icon name="repeat"></ion-icon></button> </ion-col>
+        <ion-col text-center><button ion-button icon-only><ion-icon name="shuffle"></ion-icon></button> </ion-col>
+    </ion-row>
+
+
+    <div class="img">
+        <img src="{{music.albumpic_big}}" alt="">
+    </div>
+    <ion-item>
+        <ion-range min="0" max="{{seconds}}" [(ngModel)]="hasplay" color="primary">
+            <ion-label range-left color="light">{{hasplay | secondstominute}}</ion-label>
+            <ion-label range-right color="light">{{seconds | secondstominute}}</ion-label>
+        </ion-range>
+    </ion-item>
+    <div class="play_btns">
+        <button ion-button clear icon-only color="light" (click)="previous()"><ion-icon name="skip-backward-outline"></ion-icon></button>
+        <button ion-button clear icon-only color="light" (click)="play();playStatus=!playStatus" *ngIf="!playStatus"><ion-icon name="play-outline"></ion-icon></button>
+        <button ion-button clear icon-only color="light" (click)="pause();playStatus=!playStatus" *ngIf="playStatus"><ion-icon name="pause-outline"></ion-icon></button>
+        <button ion-button clear icon-only color="light" (click)="next()"><ion-icon name="skip-forward-outline"></ion-icon></button>
+    </div>
+</ion-content>
