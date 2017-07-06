@@ -55,6 +55,7 @@
 
 ### 电影页（movie）
 ![这里写图片描述](https://github.com/DaiHuaXieHuaKai/sidemenu/blob/master/screenshots/movie.png)
+![这里写图片描述](https://github.com/DaiHuaXieHuaKai/sidemenu/blob/master/screenshots/movie-play.png)
 
 
 
