@@ -27,4 +27,10 @@ export class Article {
     console.log('ionViewDidLoad Article');
   }
 
+  doRefresh(refresher) {
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+    }, 2000);
+  }
 }

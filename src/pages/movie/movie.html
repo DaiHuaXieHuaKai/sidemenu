@@ -9,7 +9,7 @@
 
 <ion-content>
     <ion-row>
-        <ion-col col-4 *ngFor="let movie of movies" text-center>
+        <ion-col col-4 *ngFor="let movie of movies" text-center (click)="play(movie)">
             <ion-icon name="play-outline" color="light"></ion-icon>
             <img src="{{movie.cover_img}}" alt="">
             <p>{{movie.title}}</p>
