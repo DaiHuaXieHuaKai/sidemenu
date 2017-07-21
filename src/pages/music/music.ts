@@ -145,7 +145,6 @@ export class Music {
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController) {
     this.menuCtrl.enable(false, "menu");
     if (this.musics.length > 0) {
-      console.log(this.musics[0].songname)
       this.selected = this.musics[0];
     }
   }
@@ -155,11 +154,10 @@ export class Music {
   }
 
   select(data) {
-    this.navCtrl.push('music-play', data);
     this.selected = data;
   }
 
   play(data) {
-
+    this.navCtrl.push('music-play', { selectMusic: data, arryMusics: this.musics });
   }
 }

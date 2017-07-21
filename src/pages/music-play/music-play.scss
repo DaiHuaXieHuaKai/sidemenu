@@ -54,5 +54,8 @@ page-music-play {
                 border-radius: 5rem!important;
             }
         }
+        audio {
+            display: none;
+        }
     }
 }

@@ -1,3 +1,4 @@
+import { UtilProvider } from './../../providers/util/util';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
@@ -19,7 +20,8 @@ export class Article {
     author_img: 'assets/images/o.jpg', title: '那怕只有一个读者，我都想一直写下去', send_time: '2017-01-01',
     cover_image: 'assets/images/3.jpg', content: '这个世界上很多事情都看起来很神奇，我从十几岁开始写小说，用笔在一个个漂亮的笔记本上，写下故事，写下我心里的小世界。', likes: 100, comments: 200, view: 300
   }];
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
+    private util: UtilProvider) {
     this.menuCtrl.enable(false, 'menu');
   }
 
@@ -32,5 +34,9 @@ export class Article {
       console.log('Async operation has ended');
       refresher.complete();
     }, 2000);
+  }
+
+  open(data) {
+    this.util.openUrl(data);
   }
 }

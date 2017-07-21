@@ -12,8 +12,8 @@
         {{music.singername}}-{{music.songname}}
     </div>
     <ion-row class="btns">
-        <ion-col text-center><button ion-button icon-only color="light"><ion-icon name="repeat"></ion-icon></button> </ion-col>
-        <ion-col text-center><button ion-button icon-only><ion-icon name="shuffle"></ion-icon></button> </ion-col>
+        <ion-col text-center><button ion-button icon-only (click)="repeat()" color="{{shuffleFlag?'light':'primary'}}"><ion-icon name="repeat"></ion-icon></button> </ion-col>
+        <ion-col text-center><button ion-button icon-only (click)="shuffle()" color="{{shuffleFlag?'primary':'light'}}"><ion-icon name="shuffle"></ion-icon></button> </ion-col>
     </ion-row>
 
 
@@ -21,7 +21,7 @@
         <img src="{{music.albumpic_big}}" alt="">
     </div>
     <ion-item>
-        <ion-range min="0" max="{{seconds}}" [(ngModel)]="hasplay" color="primary">
+        <ion-range min="0" max="{{seconds}}" [(ngModel)]="hasplay" color="primary" (ionChange)="rangChange()">
             <ion-label range-left color="light">{{hasplay | secondstominute}}</ion-label>
             <ion-label range-right color="light">{{seconds | secondstominute}}</ion-label>
         </ion-range>
@@ -32,4 +32,7 @@
         <button ion-button clear icon-only color="light" (click)="pause();playStatus=!playStatus" *ngIf="playStatus"><ion-icon name="pause-outline"></ion-icon></button>
         <button ion-button clear icon-only color="light" (click)="next()"><ion-icon name="skip-forward-outline"></ion-icon></button>
     </div>
+    <audio #container controls autoplay>
+        
+    </audio>
 </ion-content>

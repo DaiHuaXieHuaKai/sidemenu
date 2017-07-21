@@ -9,11 +9,10 @@
 
 <ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" 
-        refreshingSpinner="circles" refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-card *ngFor="let article of articles">
+    <ion-card *ngFor="let article of articles" (click)="open(article)">
         <ion-item>
             <ion-avatar item-start>
                 <img src="{{article.author_img}}">

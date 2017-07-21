@@ -3,7 +3,7 @@
     <ion-navbar>
         <ion-title>图库</ion-title>
         <ion-buttons end>
-            <button ion-button clear icon-only><ion-icon name="add-circle-outline"></ion-icon></button>
+            <button ion-button clear icon-only (click)="newPhoto()"><ion-icon name="add-circle-outline"></ion-icon></button>
         </ion-buttons>
     </ion-navbar>
 
@@ -12,17 +12,19 @@
 
 <ion-content>
     <ion-row>
-        <ion-col col-12 class="major">
+        <ion-col col-12 class="major" (click)="showAll(major)">
             <div>
                 {{major.num}}
             </div>
             <img src="{{major.cover}}" alt="">
+            <span>{{major.title}}</span>
         </ion-col>
-        <ion-col col-6 *ngFor="let photo of photos" class="repeat">
+        <ion-col col-6 *ngFor="let photo of photos" class="repeat" (click)="showAll(photo)">
             <div>
                 {{photo.num}}
             </div>
             <img src="{{photo.cover}}" alt="">
+            <span text-center>{{photo.title}}</span>
         </ion-col>
     </ion-row>
 </ion-content>
