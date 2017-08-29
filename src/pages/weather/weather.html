@@ -6,17 +6,17 @@
 
     <ion-row>
         <ion-col col-4 text-left>
-            <button ion-button clear>
+            <!-- <button ion-button clear>
                 <ion-icon name="arrow-back"></ion-icon>  
                                 <span>前一天</span>
-            </button>
+            </button> -->
         </ion-col>
         <ion-col col-4 text-center class="today">今天</ion-col>
         <ion-col col-4 text-right>
-            <button ion-button clear>
+            <!-- <button ion-button clear>
                                 <span>后一天</span>
                 <ion-icon name="arrow-forward"></ion-icon>
-            </button>
+            </button> -->
         </ion-col>
     </ion-row>
 </ion-header>
@@ -24,41 +24,30 @@
 
 <ion-content>
     <div class="weather_img">
-        <img src="http://app1.showapi.com/weather/icon/day/00.png" alt="">
+        <img src="{{base_url+'/weather_icon/'+weather.weather+'.png'}}" alt="">
     </div>
     <ion-row class="weather_c">
-        <ion-col class="low" text-right>1℃</ion-col>
-        <ion-col class="high">8℃</ion-col>
+        <ion-col class="low" text-right>{{weather.weather}}</ion-col>
+        <ion-col class="high">{{weather.temperature}}</ion-col>
     </ion-row>
     <div class="area_line">
         <div class="line">
 
         </div>
-        <div class="area">成都</div>
+        <div class="area">{{weather.province}}-{{weather.city}}</div>
     </div>
     <ion-row class="other">
-        <ion-col class="other_item">
-            <div class="item_img">
-                <img src="http://app1.showapi.com/weather/icon/day/01.png" alt="">
+
+        <ion-col col-4 class="other_item" *ngFor="let item of weather.future;let i=index">
+            <div *ngIf="i<3" class="show_item">
+                <div class="item_img">
+                    <img src="{{base_url+'/weather_icon/'+item.dayTime+'.png'}}" alt="">
+                </div>
+                <div class="item_c">{{item.temperature}}</div>
+                <div class="item_location">{{item.week}}</div>
             </div>
-            <div class="item_c">8℃</div>
-            <div class="item_location">成都</div>
-        </ion-col>
-        <ion-col class="other_item">
-            <div class="item_img">
-                <img src="http://app1.showapi.com/weather/icon/day/03.png" alt="">
-            </div>
-            <div class="item_c">30℃</div>
-            <div class="item_location">重庆</div>
-        </ion-col>
-        <ion-col class="other_item">
-            <div class="item_img">
-                <img src="http://app1.showapi.com/weather/icon/day/11.png" alt="">
-            </div>
-            <div class="item_c">-18℃</div>
-            <div class="item_location">哈尔滨</div>
         </ion-col>
     </ion-row>
-    <ion-searchbar [(ngModel)]="inputValue" placeholder="请输入搜索城市" [showCancelButton]="false" [animated]=true (ionInput)="onInput($event)">
+    <ion-searchbar [(ngModel)]="inputValue" placeholder="请输入搜索城市" [showCancelButton]="true" cancelButtonText="{{cancelText}}" [animated]=true (ionInput)="onInput($event)" (ionCancel)="cancelBtn()">
     </ion-searchbar>
 </ion-content>

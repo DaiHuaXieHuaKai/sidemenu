@@ -68,6 +68,11 @@ page-message {
                     border-radius: .5rem!important;
                     background: #ffffff;
                     height: 3rem!important;
+                    line-height: 3rem!important;
+                    padding-left: 0.5rem;
+                    .text-input-ios {
+                        margin: 0;
+                    }
                 }
             }
             ion-col.btn {
@@ -88,6 +93,16 @@ page-message {
                     ion-icon {
                         font-size: 2.8rem!important;
                     }
+                }
+            }
+        }
+        .emoj {
+            overflow-y: scroll;
+            width: 100%;
+            height: 15rem;
+            ion-row {
+                ion-col {
+                    font-size: 2rem;
                 }
             }
         }

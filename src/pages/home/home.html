@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar [(ngModel)]="inputValue" placeholder="请输入搜索内容" [showCancelButton]="false" [animated]=true (ionInput)="onInput($event)">
+    <ion-searchbar [(ngModel)]="inputValue" (keyup)="search($event)" placeholder="请输入搜索内容" [showCancelButton]="false" [animated]=true (ionInput)="onInput($event)">
     </ion-searchbar>
 
     <ion-grid>

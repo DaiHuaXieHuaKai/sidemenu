@@ -44,7 +44,7 @@
     <ion-toolbar>
         <ion-row class="input_btn">
             <ion-col class="input">
-                <ion-input></ion-input>
+                <ion-input [(ngModel)]="inputValue"></ion-input>
             </ion-col>
             <ion-col class="btn">
                 <button ion-button no-margin (click)="sendmessage()">发送</button>
@@ -61,7 +61,7 @@
                 <button ion-button clear><ion-icon name="camera-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
-                <button ion-button clear><ion-icon name="happy-outline"></ion-icon></button>
+                <button ion-button clear (click)="showEmoj()"><ion-icon name="happy-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
                 <button ion-button clear><ion-icon name="pin-outline"></ion-icon></button>
@@ -70,5 +70,11 @@
                 <button ion-button clear><ion-icon name="add-circle-outline"></ion-icon></button>
             </ion-col>
         </ion-row>
+        <div class="emoj" *ngIf="emojFlag">
+            <ion-row>
+                <ion-col col-2 text-center *ngFor="let emoj of emojs" (click)="selectEmoj(emoj)">{{emoj}}</ion-col>
+            </ion-row>
+
+        </div>
     </ion-toolbar>
 </ion-footer>

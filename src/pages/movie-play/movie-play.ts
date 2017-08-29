@@ -10,10 +10,10 @@ declare let videojs;
   templateUrl: 'movie-play.html',
 })
 export class MoviePlayPage {
-  title = "";
+  movie = {};
   @ViewChild('container') container;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.title = this.navParams.data.data.title;
+    this.movie = this.navParams.data.data;
   }
 
   ionViewDidLoad() {
@@ -21,11 +21,11 @@ export class MoviePlayPage {
       controls: true,
       autoplay: false,
       preload: 'auto',
-      poster: this.navParams.data.data.cover_img,
+      poster: this.navParams.data.data.img,
       height: 250,
       width: window.screen.width
     });
-    player.src(this.navParams.data.data.url);
+    player.src(this.navParams.data.data.play_url);
     player.ready(() => {
       console.log("ready")
       // player.play();

@@ -1,3 +1,5 @@
+import { UtilProvider } from './../providers/util';
+import { IonicStorageModule } from '@ionic/storage';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser';
 import { Geolocation } from '@ionic-native/geolocation';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,7 +10,6 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
-import { UtilProvider } from '../providers/util/util';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { UtilProvider } from '../providers/util/util';
       mode: 'ios',
       backButtonText: ''
     }),
-    HttpModule
+    HttpModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,11 +31,12 @@ import { UtilProvider } from '../providers/util/util';
   providers: [
     StatusBar,
     SplashScreen,
-    NativeAudio,
-    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    NativeAudio,   
     UtilProvider,
     ThemeableBrowser,
-    Geolocation
+    Geolocation,
+    Storage,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
 export class AppModule { }

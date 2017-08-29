@@ -15,37 +15,35 @@
     <ion-card *ngFor="let article of articles" (click)="open(article)">
         <ion-item>
             <ion-avatar item-start>
-                <img src="{{article.author_img}}">
+                <img src="{{article.profile_image}}">
             </ion-avatar>
-            <h3>{{article.title}}</h3>
-            <p>{{article.send_time}}</p>
+            <h3>{{article.name}}</h3>
+            <p>{{article.create_time}}</p>
         </ion-item>
 
-        <img src="{{article.cover_image}}">
+        <!-- <img src="{{article.profile_image}}"> -->
 
         <ion-card-content>
-            <p>{{article.content}}</p>
+            <p>{{article.text}}</p>
         </ion-card-content>
 
         <ion-row>
             <ion-col>
                 <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
-        <div>{{article.comments}}</div>
+        <div>{{article.love}}</div>
       </button>
             </ion-col>
             <ion-col>
                 <button ion-button icon-left clear small>
-        <ion-icon name="text"></ion-icon>
-        <div>{{article.likes}}</div>
-      </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-        <ion-icon name="eye"></ion-icon>
-        <div>{{article.view}}</div>
+        <ion-icon name="thumbs-down"></ion-icon>
+        <div>{{article.hate}}</div>
       </button>
             </ion-col>
         </ion-row>
     </ion-card>
+
+    <ion-fab bottom right>
+        <button ion-fab color="primary" (click)="top()">Top</button>
+    </ion-fab>
 </ion-content>

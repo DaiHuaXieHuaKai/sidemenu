@@ -28,8 +28,8 @@ page-weather {
             width: 100%;
             text-align: center;
             img {
-                width: 16rem;
-                height: 16rem;
+                width: 14rem;
+                height: 8rem;
             }
         }
         ion-row.weather_c {
@@ -64,21 +64,23 @@ page-weather {
         }
         ion-row.other {
             margin-top: 4rem;
-            padding: 0 3rem;
+            // padding: 0 3rem;
             ion-col.other_item {
-                height: 10rem;
-                border: #ffffff solid .1rem;
-                border-radius: 1rem;
-                margin: 0 1rem;
+                .show_item {
+                    height: 10rem;
+                    border: #ffffff solid .1rem;
+                    border-radius: 1rem;
+                    margin: 1rem 1rem;
+                }
                 .item_img {
                     img {
                         width: 100%;
-                        height: 4.5rem;
+                        height: 5rem;
                     }
                 }
                 .item_c {
                     color: #ffffff;
-                    font-size: 1.8rem;
+                    font-size: 1.4rem;
                     text-align: center;
                 }
                 .item_location {

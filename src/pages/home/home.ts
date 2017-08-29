@@ -31,6 +31,13 @@ export class HomePage {
     this.menuCtrl.enable(true, "menu");
   }
 
+  search(e) {
+    if (e.keyCode == 13) {
+      this.navCtrl.push('person');
+    }
+
+  }
+
   onInput() {
 
   }
