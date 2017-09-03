@@ -17,7 +17,7 @@ export class Login {
   };
   @ViewChild(Nav) nav: Nav;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
-    private loadingCtrl: LoadingController, private util: UtilProvider, private storage: Storage) {
+    private util: UtilProvider, private storage: Storage) {
     this.menuCtrl.enable(false, "menu");
   }
 
@@ -35,17 +35,18 @@ export class Login {
       return;
     }
     //处理登录逻辑
-    this.util.post("/login/doLogin", this.loginData).then((result: any) => {
-      if (result.err == 0) {
-        this.storage.set("User", result.data).then(() => {
-          this.navCtrl.setRoot("home");
-        })
-      } else {
-        this.util.showLoading(result.msg);
-      }
-    }).catch((error) => {
+    this.navCtrl.setRoot("home");
+    // this.util.post("/login/doLogin", this.loginData).then((result: any) => {
+    //   if (result.err == 0) {
+    //     this.storage.set("User", result.data).then(() => {
+    //       this.navCtrl.setRoot("home");
+    //     })
+    //   } else {
+    //     this.util.showLoading(result.msg);
+    //   }
+    // }).catch((error) => {
 
-    })
+    // })
   }
   forget() {
 

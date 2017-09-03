@@ -16,20 +16,28 @@
                 </div>
             </ion-col>
             <ion-col class="container">
-                <div class="content">
+                <div class="content" *ngIf="message.type==0">
                     <div class="arrow"></div>
                     <div class="username">{{message.sender}}</div>
                     <div class="message">{{message.content}}</div>
+                </div>
+                <div class="content" *ngIf="message.type==1">
+                    <div class="username">{{message.sender}}</div>
+                    <img src="{{message.content}}" alt="">
                 </div>
             </ion-col>
         </ion-row>
 
         <ion-row *ngIf="message.sender_id == 1">
             <ion-col class="container">
-                <div class="content" text-right>
+                <div class="content" text-right *ngIf="message.type==0">
                     <div class="arrowright"></div>
                     <div class="username">{{message.reciver}}</div>
                     <div class="message">{{message.content}}</div>
+                </div>
+                <div class="content" text-right *ngIf="message.type==1">
+                    <div class="username">{{message.sender}}</div>
+                    <img src="{{message.content}}" alt="">
                 </div>
             </ion-col>
             <ion-col class="head">
@@ -55,10 +63,10 @@
                 <button ion-button clear><ion-icon name="mic-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
-                <button ion-button clear><ion-icon name="image-outline"></ion-icon></button>
+                <button ion-button clear (click)="upload(1)"><ion-icon name="image-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
-                <button ion-button clear><ion-icon name="camera-outline"></ion-icon></button>
+                <button ion-button clear (click)="upload(2)"><ion-icon name="camera-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
                 <button ion-button clear (click)="showEmoj()"><ion-icon name="happy-outline"></ion-icon></button>

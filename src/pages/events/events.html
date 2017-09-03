@@ -10,16 +10,16 @@
 <ion-content>
     <div class="calendar">
         <div class="date">
-            {{currentDate|date:"yyyy-MM-dd"}}
+            {{nowDate|date:"yyyy-MM"}}
         </div>
         <ion-row class="week">
             <ion-col *ngFor="let week of weeks" text-center>{{week.name}}</ion-col>
         </ion-row>
-        <ion-row class="day">
+        <ion-row class="day" (swipe)="swipe($event)">
             <ion-col *ngFor="let day of days" text-center>
-                <button ion-button small outline *ngIf="day.nowMonth!=nowMonth&&day.name!=nowDay" color="four" (click)="addEvents(day)">{{day.name}}</button>
-                <button ion-button small outline *ngIf="day.nowMonth==nowMonth&&day.name!=nowDay" color="dark" (click)="addEvents(day)">{{day.name}}</button>
-                <button ion-button small outline *ngIf="day.name==nowDay" color="primary" (click)="addEvents(day)">{{day.name}}</button>
+                <button ion-button small outline *ngIf="day.month!=nowMonth" color="four" (click)="addEvents(day)">{{day.name}}</button>
+                <!-- <button ion-button small outline *ngIf="day.name==nowDay&&day.month==nowMonth&&day.year==nowYear" color="primary" (click)="addEvents(day)">{{day.name}}</button> -->
+                <button ion-button small outline [ngClass]="{'active':day.name==currentDay&&day.month==currentMonth&&day.year==currentYear}" *ngIf="day.month==nowMonth" color="dark" (click)="addEvents(day)">{{day.name}}</button>
             </ion-col>
         </ion-row>
         <ion-row class="footer">

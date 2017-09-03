@@ -13,7 +13,7 @@ export class Article {
   articles = [];
   allPages: number = 10;
   postData = {
-    page: 1
+  page: 1
   }
   @ViewChild(Content) content: Content;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
@@ -31,7 +31,6 @@ export class Article {
 
   refresh() {
     this.util.post("/common/article", this.postData).then((result: any) => {
-      console.log(result)
       if (result.showapi_res_code == 0) {
         this.articles = result.showapi_res_body.pagebean.contentlist;
         this.allPages = result.showapi_res_body.pagebean.allPages;

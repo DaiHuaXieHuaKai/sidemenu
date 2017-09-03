@@ -10,6 +10,9 @@ import { MyApp } from './app.component';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { NativeAudio } from '@ionic-native/native-audio';
+import { Camera } from '@ionic-native/camera';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
-      backButtonText: ''
+      backButtonText: '',
+      pageTransition: 'ios-transition'
     }),
     HttpModule,
     IonicStorageModule.forRoot()
@@ -31,9 +35,12 @@ import { NativeAudio } from '@ionic-native/native-audio';
   providers: [
     StatusBar,
     SplashScreen,
-    NativeAudio,   
+    NativeAudio,
     UtilProvider,
     ThemeableBrowser,
+    Camera,
+    File,
+    FileTransfer,
     Geolocation,
     Storage,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
