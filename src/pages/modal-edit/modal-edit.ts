@@ -1,6 +1,7 @@
+import { ModalCityPage } from './../modal-city/modal-city';
 import { UtilProvider } from './../../providers/util';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ActionSheetController, AlertController, ModalController } from 'ionic-angular';
 
 @IonicPage({
   name: 'modal-edit'
@@ -10,9 +11,11 @@ import { IonicPage, NavController, NavParams, ViewController, ActionSheetControl
   templateUrl: 'modal-edit.html',
 })
 export class ModalEditPage {
-
+  userInfo: any = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController,
-    private actionSheetCtrl: ActionSheetController, private util: UtilProvider) {
+    private actionSheetCtrl: ActionSheetController, private util: UtilProvider, private alertController: AlertController,
+    private modalCtrl: ModalController) {
+    this.userInfo = this.navParams.data;
   }
 
   ionViewDidLoad() {
@@ -28,9 +31,9 @@ export class ModalEditPage {
           text: '从相册选择',
           handler: () => {
             this.util.selectImage(1).then(result => {
-              this.util.uploadImage(result,'/common/headerImg').then((res: any) => {
+              this.util.uploadImage(result, '/common/headerImg?uid=' + this.userInfo.uid).then((res: any) => {
                 if (res.err == 0) {
-                  alert(res.path);
+                  this.userInfo.avatar = res.path;
                 } else {
                   this.util.showLoading(res.msg);
                 }
@@ -46,9 +49,9 @@ export class ModalEditPage {
           text: '拍照',
           handler: () => {
             this.util.selectImage(0).then(result => {
-              this.util.uploadImage(result,'/common/headerImg').then((res: any) => {
+              this.util.uploadImage(result, '/common/headerImg?uid=' + this.userInfo.uid).then((res: any) => {
                 if (res.err == 0) {
-
+                  this.userInfo.avatar = res.path;
                 } else {
                   this.util.showLoading(res.msg);
                 }
@@ -72,7 +75,81 @@ export class ModalEditPage {
     actionsheet.present();
   }
 
+  nickname() {
+    let alert = this.alertController.create({
+      title: "设置昵称",
+      inputs: [{
+        name: 'nickname',
+        placeholder: '请输入昵称'
+      }],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: data => {
 
+          }
+        }, {
+          text: '确定',
+          handler: (data) => {
+            this.util.post("/user/update", { nickname: data.nickname, uid: this.userInfo.uid }).then((result: any) => {
+              if (result.err == 0) {
+                this.userInfo.nickname = data.nickname;
+              }
+            }).catch((error) => {
+
+            })
+          }
+        }
+      ]
+    })
+    alert.present();
+  }
+
+  sex() {
+    let alert = this.alertController.create({
+      title: '设置性别',
+      inputs: [{
+        type: 'radio',
+        label: '男',
+        value: '男',
+        checked: true
+      }, {
+        type: 'radio',
+        label: '女',
+        value: '女',
+        checked: false
+      }],
+      buttons: [{
+        text: '取消',
+        role: 'cancle',
+        handler: data => {
+        }
+      }, {
+        text: '确定',
+        handler: data => {
+          this.util.post("/user/update", { sex: data, uid: this.userInfo.uid }).then((result: any) => {
+            if (result.err == 0) {
+              this.userInfo.sex = data;
+            }
+          }).catch((error) => {
+
+          })
+        }
+      }]
+    });
+    alert.present();
+  }
+
+  area() {
+    let modal = this.modalCtrl.create('modal-city', this.userInfo);
+    modal.onDidDismiss(data => {
+      this.userInfo.province = data.province;
+      this.userInfo.city = data.city;
+      this.userInfo.area = data.area;
+    })
+    modal.present();
+  }
   /* 关闭modal */
   close() {
     this.viewCtrl.dismiss();

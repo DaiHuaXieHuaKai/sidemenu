@@ -22,7 +22,8 @@ page-weather {
     }
     ion-content {
         background-image: url('../assets/images/homebg.png');
-        background-size: 100%;
+        background-size: cover;
+        background-position-x: 50%;
         background-repeat: no-repeat;
         div.weather_img {
             width: 100%;

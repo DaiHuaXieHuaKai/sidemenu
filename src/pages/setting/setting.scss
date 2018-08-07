@@ -2,7 +2,8 @@ page-setting {
     font-family: $Font-Family;
     ion-content {
         background-image: url('../assets/images/homebg.png');
-        background-size: 100%;
+        background-size: cover;
+        background-position-x: 50%;
         background-repeat: no-repeat;
         ion-list {
             margin: 0!important;

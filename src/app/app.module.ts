@@ -1,5 +1,4 @@
 import { UtilProvider } from './../providers/util';
-import { IonicStorageModule } from '@ionic/storage';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser';
 import { Geolocation } from '@ionic-native/geolocation';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +12,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { Camera } from '@ionic-native/camera';
 import { FileTransfer } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { RongcloudProvider } from '../providers/rongcloud/rongcloud';
+import { MediaCapture } from '@ionic-native/media-capture';
 
 @NgModule({
   declarations: [
@@ -22,11 +23,9 @@ import { File } from '@ionic-native/file';
     BrowserModule,
     IonicModule.forRoot(MyApp, {
       mode: 'ios',
-      backButtonText: '',
-      pageTransition: 'ios-transition'
+      backButtonText: ''
     }),
-    HttpModule,
-    IonicStorageModule.forRoot()
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,8 +41,9 @@ import { File } from '@ionic-native/file';
     File,
     FileTransfer,
     Geolocation,
-    Storage,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    MediaCapture,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    RongcloudProvider
   ]
 })
 export class AppModule { }

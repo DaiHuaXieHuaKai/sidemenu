@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -10,12 +9,12 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'entry';
+  rootPage: any = '';
 
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar,
-    public splashScreen: SplashScreen, public alertController: AlertController, private storage: Storage) {
+    public splashScreen: SplashScreen, public alertController: AlertController) {
     this.initializeApp();
     this.pages = [
       { title: '朋友', component: 'friends' },
@@ -29,11 +28,21 @@ export class MyApp {
   }
 
   initializeApp() {
-    let this_ = this;
     this.platform.ready().then(() => {
-      this_.statusBar.styleDefault();
-      this_.splashScreen.hide();
+      this.checkIsLogin();
     });
+  }
+
+  checkIsLogin() {
+    if (localStorage.getItem("User")) {
+      this.rootPage = "home";
+    } else {
+      this.rootPage = "entry";
+    }
+    setTimeout(()=>{
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    },1000)
   }
 
   openPage(page) {
@@ -53,9 +62,8 @@ export class MyApp {
         {
           text: '确认退出',
           handler: () => {
-            this.storage.clear().then(() => {
-              this.nav.setRoot('entry');
-            })
+            localStorage.clear();
+            this.nav.setRoot('entry');
           }
         }
       ]

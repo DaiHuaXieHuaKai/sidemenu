@@ -1,6 +1,6 @@
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="secondary">
         <ion-title>{{movie.name}}</ion-title>
     </ion-navbar>
 
@@ -8,7 +8,6 @@
 
 
 <ion-content>
-    <video class="video-js vjs-default-skin vjs-big-play-centered" #container></video>
     <div class="movie_detail">
         <ion-list-header>
             影片信息
@@ -24,6 +23,9 @@
             <p>清晰度：<i ion-text>{{movie.quality}}</i></p>
             <p>上映时间：<i ion-text>{{movie.release_date}}</i></p>
             <p>影片描述：<i ion-text>{{movie.description}}</i></p>
+        </div>
+        <div padding>
+            <button ion-button block (click)="play(movie)">立即播放</button>
         </div>
     </div>
 </ion-content>

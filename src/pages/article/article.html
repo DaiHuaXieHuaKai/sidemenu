@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-    <ion-navbar>
+    <ion-navbar transparent>
         <ion-title>文章列表</ion-title>
     </ion-navbar>
 
@@ -9,41 +9,96 @@
 
 <ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中...">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-card *ngFor="let article of articles" (click)="open(article)">
-        <ion-item>
-            <ion-avatar item-start>
-                <img src="{{article.profile_image}}">
-            </ion-avatar>
-            <h3>{{article.name}}</h3>
-            <p>{{article.create_time}}</p>
-        </ion-item>
+    <div *ngFor="let article of articles" class="animated lightSpeedIn">
+        <ion-card *ngIf="article.type==10">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="{{article.profile_image}}">
+                </ion-avatar>
+                <h3>{{article.name}}</h3>
+                <p>{{article.create_time}}</p>
+            </ion-item>
+            <ion-card-content>
+                <p>{{article.text}}</p>
+                <img [src]="article.cdn_img" alt="">
+            </ion-card-content>
 
-        <!-- <img src="{{article.profile_image}}"> -->
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>{{article.love}}</div>
+              </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                <ion-icon name="thumbs-down"></ion-icon>
+                <div>{{article.hate}}</div>
+              </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+        <ion-card (click)="open(article)" *ngIf="article.type==29">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="{{article.profile_image}}">
+                </ion-avatar>
+                <h3>{{article.name}}</h3>
+                <p>{{article.create_time}}</p>
+            </ion-item>
+            <ion-card-content>
+                <p>{{article.text}}</p>
+            </ion-card-content>
 
-        <ion-card-content>
-            <p>{{article.text}}</p>
-        </ion-card-content>
-
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
         <ion-icon name="thumbs-up"></ion-icon>
         <div>{{article.love}}</div>
       </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
         <ion-icon name="thumbs-down"></ion-icon>
         <div>{{article.hate}}</div>
       </button>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+        <ion-card *ngIf="article.type==41">
+            <ion-item>
+                <ion-avatar item-start>
+                    <img src="{{article.profile_image}}">
+                </ion-avatar>
+                <h3>{{article.name}}</h3>
+                <p>{{article.create_time}}</p>
+            </ion-item>
+            <ion-card-content>
+                <p>{{article.text}}</p>
+                <video (click)="playVideo($event)" [src]="article.video_uri" width="100%" height="250" preload="auto" controls=true></video>
+            </ion-card-content>
+
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>{{article.love}}</div>
+                  </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                    <ion-icon name="thumbs-down"></ion-icon>
+                    <div>{{article.hate}}</div>
+                  </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </div>
 
     <ion-fab bottom right>
-        <button ion-fab color="primary" (click)="top()">Top</button>
+        <button ion-fab color="primary" (click)="top()">刷新</button>
     </ion-fab>
 </ion-content>

@@ -1,4 +1,4 @@
-import { PipesModule } from './../../app/pipes.module';
+import { PipesModule } from './../../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MusicPlay } from './music-play';

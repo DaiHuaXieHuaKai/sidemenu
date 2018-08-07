@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-    <ion-navbar>
+    <ion-navbar transparent>
         <ion-title>天气</ion-title>
     </ion-navbar>
 
@@ -48,6 +48,6 @@
             </div>
         </ion-col>
     </ion-row>
-    <ion-searchbar [(ngModel)]="inputValue" placeholder="请输入搜索城市" [showCancelButton]="true" cancelButtonText="{{cancelText}}" [animated]=true (ionInput)="onInput($event)" (ionCancel)="cancelBtn()">
+    <ion-searchbar [(ngModel)]="inputValue" (keyup)="search($event)" placeholder="请输入搜索城市" [showCancelButton]="true" cancelButtonText="{{cancelText}}" [animated]=true (ionInput)="onInput($event)" (ionCancel)="cancelBtn()">
     </ion-searchbar>
 </ion-content>

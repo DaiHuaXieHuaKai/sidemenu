@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Ionic App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
 
@@ -40,6 +40,12 @@
 
     <!-- The bundle js is generated during the build process -->
     <script src="build/main.js"></script>
+    <!-- 引入融云 -->
+    <!-- 强制设置消息通道为长连接模式 -->
+    <script>
+        window["WEB_XHR_POLLING"] = true
+    </script>
+    <script src="assets/js/RongIMLib-2.2.7.min.js"></script>
     <!--引入video.js-->
     <!-- If you'd like to support IE8 -->
     <script src="http://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>

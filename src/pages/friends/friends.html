@@ -1,5 +1,5 @@
-<ion-header>
-    <ion-navbar>
+<ion-header no-border>
+    <ion-navbar transparent>
         <ion-title>好友</ion-title>
     </ion-navbar>
     <ion-toolbar>
@@ -9,7 +9,7 @@
                 <span>推荐好友</span>
             </ion-segment-button>
             <ion-segment-button value="lists" (ionSelect)="selectedSegment(1)">
-                <ion-icon name="star-outline"></ion-icon>
+                <ion-icon name="people-outline"></ion-icon>
                 <span>好友列表</span>
             </ion-segment-button>
             <ion-segment-button value="message" (ionSelect)="selectedSegment(2)">
@@ -17,92 +17,105 @@
                 <span>消息</span>
             </ion-segment-button>
             <ion-segment-button value="search" (ionSelect)="selectedSegment(3)">
-                <ion-icon name="search-outline"></ion-icon>
-                <span>搜索</span>
+                <ion-icon name="person-outline"></ion-icon>
+                <span>新朋友</span>
             </ion-segment-button>
         </ion-segment>
     </ion-toolbar>
-    <div class="total" text-center>
-        <span>好友人数：800</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>在线人数：366</span>
-    </div>
 
 </ion-header>
 
 
 <ion-content>
+    <!--推荐好友    -->
+    <ion-list class="friends" *ngIf="activePage==0">
+        <ion-item *ngFor="let notFriend of notFriends">
+            <ion-avatar item-left>
+                <span *ngIf="notFriend.online==0" style="color:#989898!important;">.</span>
+                <span *ngIf="notFriend.online==1" style="color:#02ff00!important;">.</span>
+                <img src="{{notFriend.avatar}}">
+            </ion-avatar>
+            <h2>{{notFriend.nickname}}</h2>
+            <p>{{notFriend.city}}</p>
+            <button ion-button clear item-right (click)="addFriend(notFriend)">
+                       <ion-icon name="add-circle-outline"></ion-icon>
+                    </button>
+
+        </ion-item>
+    </ion-list>
     <!--好友列表    -->
-    <ion-list class="lists" *ngIf="activePage==0">
+    <ion-list class="lists" *ngIf="activePage==1">
         <ion-item-sliding #slidingItem *ngFor="let friend of friends">
             <ion-item>
                 <ion-avatar item-left>
-                    <span *ngIf="friend.status==0" style="color:#989898!important;">.</span>
-                    <span *ngIf="friend.status==1" style="color:#02ff00!important;">.</span>
-                    <span *ngIf="friend.status==2" style="color:#f98000!important;">.</span>
-                    <img src="{{friend.image}}">
+                    <span *ngIf="friend.online==0" style="color:#989898!important;">.</span>
+                    <span *ngIf="friend.online==1" style="color:#02ff00!important;">.</span>
+                    <img src="{{friend.avatar}}">
                 </ion-avatar>
-                <h2>{{friend.name}}</h2>
-                <p>{{friend.location}}</p>
+                <h2>{{friend.nickname}}</h2>
+                <p>{{friend.city}}</p>
                 <span item-end>
                     右滑操作
                 </span>
             </ion-item>
             <ion-item-options side="left">
-                <button ion-button (click)="add(slidingItem,friend)">
-                  <ion-icon name="add-outline"></ion-icon>
-                </button>
+                <button ion-button (click)="chat(slidingItem,friend)">
+                    <ion-icon name="chatboxes-outline"></ion-icon>
+                  </button>
                 <button ion-button (click)="call(slidingItem,friend)">
                   <ion-icon name="call-outline"></ion-icon>
                 </button>
-                <button ion-button (click)="mail(slidingItem,friend)">
-                 <ion-icon name="mail-outline"></ion-icon>
-               </button>
             </ion-item-options>
         </ion-item-sliding>
     </ion-list>
-
-    <!--推荐好友    -->
-    <ion-list class="friends" *ngIf="activePage==1">
-        <ion-item *ngFor="let friend of friends">
-            <ion-avatar item-left>
-                <span *ngIf="friend.status==0" style="color:#989898!important;">.</span>
-                <span *ngIf="friend.status==1" style="color:#02ff00!important;">.</span>
-                <span *ngIf="friend.status==2" style="color:#f98000!important;">.</span>
-                <img src="{{friend.image}}">
-            </ion-avatar>
-            <h2>{{friend.name}}</h2>
-            <p>{{friend.location}}</p>
-            <button ion-button clear item-right (click)="addFriend(friend)">
-               <ion-icon name="add-circle-outline"></ion-icon>
-            </button>
-
-        </ion-item>
-    </ion-list>
-
     <!--消息列表    -->
     <ion-list class="news" *ngIf="activePage==2">
-        <ion-item-sliding #slidingItemNews *ngFor="let new of news">
-            <ion-item>
+        <ion-item-sliding #slidingItemNews *ngFor="let cs of conversationLists">
+            <!-- 根据messageDirection判断是发送还是接收消息1=发送 2=接收 -->
+            <ion-item (click)="conversation(cs)">
                 <ion-avatar item-left>
-                    <img src="{{new.send_image}}">
+                    <img src="{{cs.latestMessage.content?.extra|avatar}}" *ngIf="cs.latestMessage.messageDirection==1">
+                    <img src="{{cs.latestMessage.content?.user.portrait}}" *ngIf="cs.latestMessage.messageDirection==2">
                 </ion-avatar>
-                <h2>{{new.send_name}}</h2>
-                <p>{{new.send_content}}</p>
-                <ion-note item-end>{{new.send_time}}</ion-note>
-                <button ion-button clear *ngIf="new.news_num>0">
-                <ion-badge item-end>{{new.news_num}}</ion-badge>
+                <h2 *ngIf="cs.latestMessage.messageDirection==1">{{cs.latestMessage.content?.extra|nickname }}</h2>
+                <h2 *ngIf="cs.latestMessage.messageDirection==2">{{cs.latestMessage.content?.user.name }}</h2>
+                <p *ngIf="cs.objectName=='RC:TxtMsg'">{{cs.latestMessage.content?.content}}</p>
+                <p *ngIf="cs.objectName=='RC:ImgMsg'">[图片]</p>
+                <ion-note item-end>{{cs.sentTime | date:"shortTime"}}</ion-note>
+                <button ion-button clear *ngIf="cs.unreadMessageCount>0">
+                <ion-badge item-end>{{cs.unreadMessageCount}}</ion-badge>
                 </button>
             </ion-item>
             <ion-item-options side="right">
-                <button ion-button color="four" (click)="totop(slidingItemNews,new)">
-                  置顶
-                </button>
-                <button ion-button color="third" (click)="hasread(slidingItemNews,new)">
+                <button ion-button color="third" (click)="hasread(slidingItemNews,cs)">
                   标为已读
                 </button>
-                <button ion-button color="danger" (click)="delete(slidingItemNews,new)">
+                <button ion-button color="danger" (click)="delete(slidingItemNews,cs)">
                  删除
                </button>
             </ion-item-options>
         </ion-item-sliding>
+    </ion-list>
+    <!-- 新朋友 -->
+    <ion-list class="apply" *ngIf="activePage==3">
+        <ion-item *ngFor="let apply of applyList">
+            <ion-avatar item-start>
+                <img src="{{apply.avatar}}">
+            </ion-avatar>
+            <h2>{{apply.nickname}}</h2>
+            <p>{{apply.content}}</p>
+            <ion-note item-end *ngIf="apply.status!=0">{{apply.status|applyStatus}}</ion-note>
+            <ion-row *ngIf="apply.status==0">
+                <ion-col>
+                    <button ion-button round block small color="four" (click)="deal(apply,3)">忽略</button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button round block small color="danger" (click)="deal(apply,2)">拒绝</button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button round block small color="primary" (click)="deal(apply,1)">同意</button>
+                </ion-col>
+            </ion-row>
+        </ion-item>
     </ion-list>
 </ion-content>

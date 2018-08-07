@@ -1,7 +1,7 @@
+import { UtilProvider } from './../../providers/util';
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-declare let videojs;
 @IonicPage({
   name: 'movie-play'
 })
@@ -12,30 +12,17 @@ declare let videojs;
 export class MoviePlayPage {
   movie = {};
   @ViewChild('container') container;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private util: UtilProvider) {
     this.movie = this.navParams.data.data;
+    console.log(this.movie)
   }
 
   ionViewDidLoad() {
-    let player = videojs(this.container.nativeElement, {
-      controls: true,
-      autoplay: false,
-      preload: 'auto',
-      poster: this.navParams.data.data.img,
-      height: 250,
-      width: window.screen.width
-    });
-    player.src(this.navParams.data.data.play_url);
-    player.ready(() => {
-      console.log("ready")
-      // player.play();
-      //player.pause();
-    })
-    //不建议使用
-    player.ended(() => {
-      player.dispose();
-    });
 
+  }
+
+  play(data) {
+    this.util.openMovieUrl(data);
   }
 
 }

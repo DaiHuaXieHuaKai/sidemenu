@@ -1,5 +1,6 @@
+import { RongcloudProvider } from './../../providers/rongcloud/rongcloud';
 import { Component } from '@angular/core';
-import { NavController, IonicPage, MenuController } from 'ionic-angular';
+import { NavController, IonicPage, MenuController, Platform } from 'ionic-angular';
 
 @IonicPage({
   name: "home"
@@ -9,7 +10,6 @@ import { NavController, IonicPage, MenuController } from 'ionic-angular';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  inputValue = '';
   menus = [
     { icon: 'assets/images/menu/person.png', text: '个人', id: 0 },
     { icon: 'assets/images/menu/friends.png', text: '朋友', id: 1 },
@@ -24,22 +24,13 @@ export class HomePage {
     { icon: 'assets/images/menu/music.png', text: '音乐', id: 10 },
     { icon: 'assets/images/menu/movie.png', text: '电影', id: 11 }
   ]
-  constructor(public navCtrl: NavController, public menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public menuCtrl: MenuController,
+    private platform: Platform, private rongCloud: RongcloudProvider) {
+    // this.rongCloud.connect();
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(true, "menu");
-  }
-
-  search(e) {
-    if (e.keyCode == 13) {
-      this.navCtrl.push('person');
-    }
-
-  }
-
-  onInput() {
-
   }
 
   into(index) {

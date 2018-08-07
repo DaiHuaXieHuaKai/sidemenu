@@ -28,7 +28,7 @@ export class Weather {
     this.refresh();
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Weather');
+
   }
 
   refresh() {
@@ -53,6 +53,14 @@ export class Weather {
 
   cancelBtn() {
     if (this.cancelText == "确定") {
+      this.postData.city = this.inputValue;
+      this.refresh();
+    }
+  }
+
+  //回车键搜索
+  search(e) {
+    if (e.keyCode == 13) {
       this.postData.city = this.inputValue;
       this.refresh();
     }

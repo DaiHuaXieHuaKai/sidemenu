@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-    <ion-navbar>
+    <ion-navbar transparent>
         <ion-title>个人</ion-title>
     </ion-navbar>
 
@@ -10,34 +10,32 @@
 <ion-content>
     <div class="head" text-center>
         <div class="head_img">
-            <img src="assets/images/o.jpg" alt="">
+            <img src="{{userInfo.avatar}}" alt="" onerror="this.src='assets/images/avatar.png'">
         </div>
-        <div class="username">Dai Hua Xie Hua Kai</div>
+        <div class="username">{{userInfo.nickname}}</div>
         <div class="location">
             <ion-icon name="locate">
             </ion-icon>
-            四川.成都
+            {{userInfo.province+userInfo.city}}
         </div>
     </div>
     <ion-list no-margin>
-        <ion-item>
+        <ion-item (click)="clickItem(0)">
             <img src="assets/images/menu/friends.png" alt="" item-left> 朋友
         </ion-item>
-        <ion-item>
+        <ion-item (click)="clickItem(1)">
             <img src="assets/images/menu/email.png" alt="" item-left> 消息
-            <ion-badge color="light" item-right>20</ion-badge>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="clickItem(2)">
             <img src="assets/images/menu/chat.png" alt="" item-left> 聊天
-            <ion-badge color="light" item-right>10</ion-badge>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="clickItem(3)">
             <img src="assets/images/menu/photo.png" alt="" item-left> 拍照
         </ion-item>
-        <ion-item>
+        <ion-item (click)="clickItem(4)">
             <img src="assets/images/menu/music.png" alt="" item-left> 音乐
         </ion-item>
-        <ion-item>
+        <ion-item (click)="clickItem(5)">
             <img src="assets/images/menu/movie.png" alt="" item-left> 电影
         </ion-item>
     </ion-list>

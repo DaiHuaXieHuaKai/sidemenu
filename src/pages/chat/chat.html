@@ -1,25 +1,45 @@
 <ion-header>
-
-    <ion-navbar>
-        <ion-title>会话</ion-title>
+    <ion-navbar no-border-bottom>
+        <ion-title>
+            Segments
+        </ion-title>
     </ion-navbar>
 
+    <ion-toolbar no-border-top>
+        <ion-segment [(ngModel)]="segmentModel">
+            <ion-segment-button value="segmentOne">
+                segmentOne
+            </ion-segment-button>
+            <ion-segment-button value="segmentTwo">
+                segmentTwo
+            </ion-segment-button>
+            <ion-segment-button value="segmentThree">
+                segmentThree
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let new of news">
-            <ion-avatar item-left>
-                <img src="{{new.send_image}}">
-            </ion-avatar>
-            <h2 class="name">{{new.send_name}}</h2>
-            <p class="content">{{new.send_content}}</p>
-            <p class="time">{{new.send_time}}</p>
-            <button ion-button clear item-right (click)="detail(new)" color="light">
-               <ion-icon name="arrow-dropright-outline"></ion-icon>
-            </button>
+    <div (swipe)="swipeEvent($event)">
+        <div [ngSwitch]="segmentModel">
+            <ion-list *ngSwitchCase="'segmentOne'">
+                <ion-item>
+                    <h2>segmentOne</h2>
+                </ion-item>
+            </ion-list>
 
-        </ion-item>
-    </ion-list>
+            <ion-list *ngSwitchCase="'segmentTwo'">
+                <ion-item>
+                    <h2>segmentTwo</h2>
+                </ion-item>
+            </ion-list>
+
+            <ion-list *ngSwitchCase="'segmentThree'">
+                <ion-item>
+                    <h2>segmentThree</h2>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
 </ion-content>

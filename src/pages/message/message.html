@@ -1,7 +1,12 @@
-<ion-header>
+<ion-header no-border>
 
-    <ion-navbar>
-        <ion-title>聊天</ion-title>
+    <ion-navbar transparent>
+        <ion-title>{{title}}</ion-title>
+        <ion-buttons end>
+            <button ion-button clear (click)="clearHistory()">
+                <ion-icon name="trash"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 
 </ion-header>
@@ -9,40 +14,40 @@
 
 <ion-content scrollDownOnLoad=true>
     <ion-grid *ngFor="let message of messages">
-        <ion-row *ngIf="message.sender_id != 1">
+        <ion-row *ngIf="message.messageDirection == 2">
             <ion-col class="head">
                 <div class="img_head">
-                    <img src="{{message.sender_image}}" alt="">
+                    <img src="{{message.content?.user?.portrait}}" alt="">
                 </div>
             </ion-col>
             <ion-col class="container">
-                <div class="content" *ngIf="message.type==0">
+                <div class="content" *ngIf="message.objectName=='RC:TxtMsg'">
                     <div class="arrow"></div>
-                    <div class="username">{{message.sender}}</div>
-                    <div class="message">{{message.content}}</div>
+                    <div class="username">{{message.content?.user?.name}}</div>
+                    <div class="message">{{message.content?.content}}</div>
                 </div>
-                <div class="content" *ngIf="message.type==1">
-                    <div class="username">{{message.sender}}</div>
-                    <img src="{{message.content}}" alt="">
+                <div class="content" *ngIf="message.objectName=='RC:ImgMsg'">
+                    <div class="username">{{message.content?.user?.name}}</div>
+                    <img [src]="message.content?.content|trustHtml" alt="">
                 </div>
             </ion-col>
         </ion-row>
 
-        <ion-row *ngIf="message.sender_id == 1">
+        <ion-row *ngIf="message.messageDirection == 1">
             <ion-col class="container">
-                <div class="content" text-right *ngIf="message.type==0">
+                <div class="content" text-right *ngIf="message.objectName=='RC:TxtMsg'">
                     <div class="arrowright"></div>
-                    <div class="username">{{message.reciver}}</div>
-                    <div class="message">{{message.content}}</div>
+                    <div class="username">{{message.content?.user?.name}}</div>
+                    <div class="message">{{message.content?.content}}</div>
                 </div>
-                <div class="content" text-right *ngIf="message.type==1">
-                    <div class="username">{{message.sender}}</div>
-                    <img src="{{message.content}}" alt="">
+                <div class="content" text-right *ngIf="message.objectName=='RC:ImgMsg'">
+                    <div class="username">{{message.content?.user?.name}}</div>
+                    <img [src]="message.content?.content|trustHtml" alt="">
                 </div>
             </ion-col>
             <ion-col class="head">
                 <div class="img_head">
-                    <img src="{{message.reciver_image}}" alt="">
+                    <img src="{{message.content?.user?.portrait}}" alt="">
                 </div>
             </ion-col>
         </ion-row>
@@ -60,7 +65,7 @@
         </ion-row>
         <ion-row class="function">
             <ion-col col-2>
-                <button ion-button clear><ion-icon name="mic-outline"></ion-icon></button>
+                <button ion-button clear (click)="voice()"><ion-icon name="mic-outline"></ion-icon></button>
             </ion-col>
             <ion-col col-2>
                 <button ion-button clear (click)="upload(1)"><ion-icon name="image-outline"></ion-icon></button>

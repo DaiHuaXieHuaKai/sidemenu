@@ -1,5 +1,5 @@
-<ion-header>
-    <ion-navbar>
+<ion-header no-border>
+    <ion-navbar transparent>
         <ion-buttons start>
             <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -10,14 +10,11 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-searchbar [(ngModel)]="inputValue" (keyup)="search($event)" placeholder="请输入搜索内容" [showCancelButton]="false" [animated]=true (ionInput)="onInput($event)">
-    </ion-searchbar>
-
     <ion-grid>
         <ion-row>
             <ion-col col-4 text-center *ngFor="let menu of menus">
                 <div class="col" (click)="into(menu.id)">
-                    <img ion-content src="{{menu.icon}}" alt="">
+                    <img ion-content [src]="menu.icon" alt="">
                     <ion-label color="light" no-margin>{{menu.text}}</ion-label>
                 </div>
             </ion-col>

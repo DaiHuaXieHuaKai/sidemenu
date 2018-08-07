@@ -1,6 +1,8 @@
+import { MediaCapture } from '@ionic-native/media-capture';
+import { RongcloudProvider } from './../../providers/rongcloud/rongcloud';
 import { UtilProvider } from './../../providers/util';
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content, MenuController, AlertController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content, MenuController, Events, AlertController } from 'ionic-angular';
 
 @IonicPage({
   name: 'message'
@@ -12,41 +14,110 @@ import { IonicPage, NavController, NavParams, Content, MenuController, AlertCont
 export class Message {
   @ViewChild(Content) content: Content;
   inputValue = "";
-  messages = [
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: 'http://172.20.10.15:8888/imageUpload/infinite_1504074972822.jpg', type: 1 },
-    { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '金华市工业银行', type: 0 },
-    { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '度有意义欧耶耶', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 2, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: '灵界基友两节课', type: 0 },
-    { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: 'assets/images/o.jpg', type: 1 }
-  ];
+  fromUserInfo: any;
+  toUserInfo: any;
+  title: string = "";
+  messages = [];
   emojs = [];
   emojFlag = false;
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
-    private util: UtilProvider, private actionsheetCtrl: ActionSheetController) {
+    private util: UtilProvider, private rondCloud: RongcloudProvider, private events: Events, private alertController: AlertController,
+    private mediaCapture: MediaCapture) {
     this.menuCtrl.enable(false, "menu");
     this.emojs = this.util.getEmoj();
+    this.title = this.navParams.data.toNickname;
+    this.events.subscribe("newMessage", (message) => {
+      if (message.targetId == this.navParams.data.toUid) {
+        this.messages.push(message);
+        this.scrollToBottom();
+      }
+    })
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
+    if (this.navParams.data) {
+      /* 先获取发送者和接收者的用户信息 */
+      this.util.post("/user/getUsersInfo", { fromUid: this.util.getItem("User").uid, toUid: this.navParams.data.toUid }).then((result: any) => {
+        if (result.err == 0) {
+          this.fromUserInfo = result.fromUser;
+          this.toUserInfo = result.toUser;
+          /* 获取历史会话信息 */
+          let data = { conversationType: 1, targetId: this.navParams.data.toUid };
+          this.rondCloud.getHistroyMessage(data).then((result: any) => {
+            this.messages = result;
+            this.scrollToBottom();
+          }).catch(error => { })
+        } else {
+          this.util.showLoading(result.msg);
+        }
+      }).catch(error => {
 
-    console.log('ionViewDidLoad Message');
+      })
+
+    }
+  }
+  /* 清除历史消息 */
+  clearHistory() {
+    let alertCtrl = this.alertController.create({
+      title: "提示信息",
+      message: "是否确定删除历史记录？",
+      buttons: [{
+        text: '取消',
+        handler: () => { }
+      }, {
+        text: "确定",
+        handler: () => {
+          let data = { conversationType: 1, targetId: this.navParams.data.toUid };
+          this.rondCloud.clearMessages(data).then(result => {
+            if (result == 1) {
+              /* 获取历史会话信息 */
+              let data = { conversationType: 1, targetId: this.navParams.data.toUid };
+              this.rondCloud.getHistroyMessage(data).then((result: any) => {
+                this.messages = result;
+                this.scrollToBottom();
+              }).catch(error => { })
+            } else {
+              this.util.showLoading("清除失败");
+            }
+          }).catch(error => {
+
+          })
+        }
+      }]
+    })
+    alertCtrl.present();
   }
 
-
-
-
-
+  /* 语音 */
+  voice() {
+    //参数limit默认是1，如果设置为3的话表示可以录制3个片段
+    this.mediaCapture.captureAudio().then((res:any) => {
+      let path = res[0].fullPath;
+      let type = res[0].type;
+      this.util.uploadFile(path,'/common/uploadFile',type).then((res:any)=>{
+        if (res.err == 0) {
+          // let data = {
+          //   conversationType: 1,
+          //   targetId: this.toUserInfo.uid,
+          //   targetAvatar: this.toUserInfo.avatar,
+          //   targetNickname: this.toUserInfo.nickname,
+          //   imageUri: res.path,
+          //   text: res.pathSmall,
+          //   uid: this.fromUserInfo.uid,
+          //   avatar: this.fromUserInfo.avatar,
+          //   nickname: this.fromUserInfo.nickname
+          // }
+          // this.rondCloud.sendImageMessage(data).then((result: any) => {
+          //   this.messages.push(result);
+          //   this.scrollToBottom();
+          // }).catch(error => { })
+        } else {
+          this.util.showLoading(res.msg);
+        }
+      }).catch(error=>{})
+      
+    }, (error) => { })
+  }
   /* 
   选择图片
   */
@@ -55,37 +126,61 @@ export class Message {
     /* 图库 */
     if (index == 1) {
       this.util.selectImage(1).then(result => {
-        this.util.uploadImage(result,'/common/upload').then((res: any) => {
+        this.util.uploadImage(result, '/common/upload').then((res: any) => {
           if (res.err == 0) {
-            let mes = { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: res.path, type: 1 };
-            this_.messages.push(mes);
-            this_.scrollToBottom();
+            let data = {
+              conversationType: 1,
+              targetId: this.toUserInfo.uid,
+              targetAvatar: this.toUserInfo.avatar,
+              targetNickname: this.toUserInfo.nickname,
+              imageUri: res.path,
+              text: res.pathSmall,
+              uid: this.fromUserInfo.uid,
+              avatar: this.fromUserInfo.avatar,
+              nickname: this.fromUserInfo.nickname
+            }
+            this.rondCloud.sendImageMessage(data).then((result: any) => {
+              this.messages.push(result);
+              this.scrollToBottom();
+            }).catch(error => { })
           } else {
             this.util.showLoading(res.msg);
           }
         }, (err) => {
-          this.util.showLoading("图片上传失败");
+          this.util.showLoading("信息发送失败，请稍后再试");
         })
       }).catch(error => {
-        this.util.showLoading("图片获取失败");
+        //this.util.showLoading("图片获取失败");
       })
     }
     /* 相机 */
     if (index == 2) {
       this.util.selectImage(0).then(result => {
-        this.util.uploadImage(result,'/common/upload').then((res: any) => {
+        this.util.uploadImage(result, '/common/upload').then((res: any) => {
           if (res.err == 0) {
-            let mes = { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: res.path, type: 1 };
-            this_.messages.push(mes);
-            this_.scrollToBottom();
+            let data = {
+              conversationType: 1,
+              targetId: this.toUserInfo.uid,
+              targetAvatar: this.toUserInfo.avatar,
+              targetNickname: this.toUserInfo.nickname,
+              imageUri: res.path,
+              text: res.pathSmall,
+              uid: this.fromUserInfo.uid,
+              avatar: this.fromUserInfo.avatar,
+              nickname: this.fromUserInfo.nickname
+            }
+            this.rondCloud.sendImageMessage(data).then((result: any) => {
+              this.messages.push(result);
+              this.scrollToBottom();
+            }).catch(error => { })
           } else {
             this.util.showLoading(res.msg);
           }
         }, (err) => {
-          this.util.showLoading("图片上传失败");
+          this.util.showLoading("信息发送失败，请稍后再试");
         })
       }).catch(error => {
-        this.util.showLoading("图片获取失败");
+        //this.util.showLoading("图片获取失败");
       })
     }
   }
@@ -112,16 +207,31 @@ export class Message {
   /* 
   发送定位
   */
-  
+
   /* 
   发送消息
   */
   sendmessage() {
     this.emojFlag = false;
-    let mes = { sender_id: 1, sender: 'Dai Hua Xie Hua Kai', reciver: '我', sender_image: 'assets/images/o.jpg', reciver_image: 'assets/images/o.jpg', content: this.inputValue, type: 0 };
-    this.inputValue = "";
-    this.messages.push(mes);
-    this.scrollToBottom();
+    let data = {
+      conversationType: 1,
+      targetId: this.toUserInfo.uid,
+      targetAvatar: this.toUserInfo.avatar,
+      targetNickname: this.toUserInfo.nickname,
+      text: this.inputValue,
+      uid: this.fromUserInfo.uid,
+      avatar: this.fromUserInfo.avatar,
+      nickname: this.fromUserInfo.nickname
+    }
+    this.rondCloud.sendTextMessage(data).then((result) => {
+      if (result) {
+        this.inputValue = "";
+        this.messages.push(result);
+        this.scrollToBottom();
+      } else {
+        this.util.showLoading("信息发送失败，请稍后再试");
+      }
+    }).catch(error => { })
   }
   /* 
   滚动到底部
@@ -133,4 +243,3 @@ export class Message {
     }, 300)
   }
 }
-

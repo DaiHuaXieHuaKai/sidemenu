@@ -1,5 +1,4 @@
 import { UtilProvider } from './../../providers/util';
-import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
@@ -20,7 +19,7 @@ export class Register {
     code: ""
   }
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
-    private util: UtilProvider, private storage: Storage) {
+    private util: UtilProvider) {
     this.menuCtrl.enable(false, "menu");
   }
 
@@ -39,9 +38,8 @@ export class Register {
     //处理注册逻辑
     this.util.post("/login/register", this.registerData).then((result: any) => {
       if (result.err == 0) {
-        this.storage.set("User", result.data).then(() => {
-          this.navCtrl.setRoot("home");
-        })
+        this.util.setItem("User", result.data);
+        this.navCtrl.setRoot("home");
       } else {
         this.util.showLoading(result.msg);
       }

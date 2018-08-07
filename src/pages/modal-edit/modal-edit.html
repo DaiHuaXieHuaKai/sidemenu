@@ -1,9 +1,9 @@
-<ion-header>
+<ion-header no-border>
 
-    <ion-navbar>
+    <ion-navbar color="secondary">
         <ion-buttons>
             <button ion-button (click)="close()">
-            <ion-icon name="arrow-back"></ion-icon>
+            <ion-icon name="arrow-back" color="primary"></ion-icon>
           </button>
         </ion-buttons>
         <ion-title>编辑资料</ion-title>
@@ -16,24 +16,20 @@
         <ion-item detail-push (click)="head()">
             头像
             <ion-avatar item-end>
-                <img src="img/avatar-cher.png">
+                <img src="{{userInfo.avatar}}">
             </ion-avatar>
         </ion-item>
-        <ion-item detail-push (click)="username()">
-            用户名
-            <ion-note ion-content item-end>待花谢花开</ion-note>
-        </ion-item>
-        <ion-item detail-push (click)="intro()">
-            介绍
-            <ion-note ion-content item-end>待花谢花开</ion-note>
+        <ion-item detail-push (click)="nickname()">
+            昵称
+            <ion-note ion-content item-end>{{userInfo.nickname}}</ion-note>
         </ion-item>
         <ion-item detail-push (click)="sex()">
             性别
-            <ion-note ion-content item-end>待花谢花开</ion-note>
+            <ion-note ion-content item-end>{{userInfo.sex}}</ion-note>
         </ion-item>
         <ion-item detail-push (click)="area()">
             地区
-            <ion-note ion-content item-end>待花谢花开</ion-note>
+            <ion-note ion-content item-end>{{userInfo.province+userInfo.city+userInfo.area}}</ion-note>
         </ion-item>
 
     </ion-list>

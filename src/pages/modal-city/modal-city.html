@@ -1,0 +1,41 @@
+<div class="content">
+    <div class="content_item">
+        <div class="item_header">
+            所在地区
+            <ion-icon name="close" (click)="close()"></ion-icon>
+        </div>
+        <div class="item_detail">
+            <div class="item_btn" *ngIf="provinceName" (click)="currentProvince($event)">{{provinceName}}</div>
+            <div class="item_btn" *ngIf="cityName" (click)="currentCity($event)">{{cityName}}</div>
+            <div class="item_btn" *ngIf="areaName" (click)="currentArea($event)">{{areaName}}</div>
+            <div class="item_btn select active_btn">请选择</div>
+        </div>
+        <ion-scroll scrollX="false" scrollY="true" *ngIf="provinceFlag">
+            <ion-list radio-group>
+                <ion-item *ngFor="let province of provinces">
+                    <ion-label>{{province.province}}</ion-label>
+                    <ion-radio *ngIf="province.province!=provinceName" checked="false" value="{{province.provinceid}}" color="red" (ionSelect)="selectProvince(province)"></ion-radio>
+                    <ion-radio *ngIf="province.province==provinceName" checked="true" value="{{province.provinceid}}" color="red" (ionSelect)="selectProvince(province)"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+        <ion-scroll scrollX="false" scrollY="true" *ngIf="cityFlag">
+            <ion-list radio-group>
+                <ion-item *ngFor="let city of cities">
+                    <ion-label>{{city.city}}</ion-label>
+                    <ion-radio *ngIf="city.city!=cityName" checked="false" value="{{city.cityid}}" color="red" (ionSelect)="selectCity(city)"></ion-radio>
+                    <ion-radio *ngIf="city.city==cityName" checked="true" value="{{city.cityid}}" color="red" (ionSelect)="selectCity(city)"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+        <ion-scroll scrollX="false" scrollY="true" *ngIf="areaFlag">
+            <ion-list radio-group>
+                <ion-item *ngFor="let area of areas">
+                    <ion-label>{{area.area}}</ion-label>
+                    <ion-radio *ngIf="area.area!=areaName" checked="false" value="{{area.areaid}}" color="red" (ionSelect)="selectArea(area)"></ion-radio>
+                    <ion-radio *ngIf="area.area==areaName" checked="true" value="{{area.areaid}}" color="red" (ionSelect)="selectArea(area)"></ion-radio>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+    </div>
+</div>

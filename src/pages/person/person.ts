@@ -1,7 +1,6 @@
 import { UtilProvider } from './../../providers/util';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, AlertController, ModalController } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
 
 @IonicPage({
   name: 'person'
@@ -14,18 +13,18 @@ export class Person {
 
   userInfo = {};
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController,
-    private alertController: AlertController, private storage: Storage, private modalCtrl: ModalController,
+    private alertController: AlertController, private modalCtrl: ModalController,
     private util: UtilProvider) {
     this.menuCtrl.enable(false, "menu");
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     this.getUserDetail();
   }
 
   /* 获取用户信息 */
   getUserDetail() {
-    this.util.post('/user/userDetail', { uid: 19 }).then((result: any) => {
+    this.util.post('/user/userDetail', { uid: this.util.getItem("User").uid }).then((result: any) => {
       if (result.err == 0) {
         this.userInfo = result.data;
       } else {
@@ -36,9 +35,31 @@ export class Person {
     })
   }
 
+  clickItem(index){
+    switch(index){
+      case 0:
+      this.navCtrl.push("friends");
+      break;
+      case 1:
+      this.navCtrl.push("message");
+      break;
+      case 2:
+      this.navCtrl.push("chat");
+      break;
+      case 3:
+      this.navCtrl.push("photo");
+      break;
+      case 4:
+      this.navCtrl.push("music");
+      break;
+      case 5:
+      this.navCtrl.push("movie");
+      break;
+    }
+  }
   /* 编辑信息 */
   edit() {
-    let modal = this.modalCtrl.create('modal-edit');
+    let modal = this.modalCtrl.create('modal-edit',this.userInfo);
     modal.present();
   }
 
@@ -56,9 +77,8 @@ export class Person {
         {
           text: '确认退出',
           handler: () => {
-            this.storage.clear().then(() => {
+              localStorage.clear();
               this.navCtrl.setRoot('entry');
-            })
           }
         }
       ]

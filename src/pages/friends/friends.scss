@@ -5,6 +5,7 @@ page-friends {
             min-height: 6rem!important;
             ion-segment {
                 background: #f8f8f8!important;
+                border-bottom: rgb(238, 238, 238) solid 1px;
                 ion-segment-button {
                     color: #0b71a5!important;
                     width: 100%!important;
@@ -33,18 +34,11 @@ page-friends {
                 }
             }
         }
-        .total {
-            background: #0b71a5;
-            height: 3rem;
-            line-height: 3rem;
-            span {
-                color: #ffffff;
-            }
-        }
     }
     ion-content {
         background-image: url('../assets/images/homebg.png');
-        background-size: 100%;
+        background-size: cover;
+        background-position-x: 50%;
         background-repeat: no-repeat;
         ion-list.lists {
             ion-item-sliding {

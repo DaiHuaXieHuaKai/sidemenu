@@ -9,25 +9,32 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
   templateUrl: 'chat.html',
 })
 export class Chat {
-  news = [
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 20, send_time: '下午3:33', send_content: '今天下午我要回家' },
-    { send_name: 'Software', send_image: 'assets/images/o.jpg', news_id: 1, news_num: 0, send_time: '下午3:33', send_content: '今天下午我要回家' }
-  ]
+  segmentsArray = ['segmentOne', 'segmentTwo', 'segmentThree'];
+  segmentModel: string = this.segmentsArray[0];
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController) {
     this.menuCtrl.enable(false, 'menu');
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Chat');
+  ionViewWillEnter() {
+
   }
 
-  detail() {
-    this.navCtrl.push('message');
+  swipeEvent(event) {
+    alert(1)
+    //向左滑
+    if (event.direction == 2) {
+      if (this.segmentsArray.indexOf(this.segmentModel) < 2) {
+        this.segmentModel = this.segmentsArray[this.segmentsArray.indexOf(this.segmentModel) + 1];
+      }
+    }
+    //向右滑
+    if (event.direction == 4) {
+      if (this.segmentsArray.indexOf(this.segmentModel) > 0) {
+        this.segmentModel = this.segmentsArray[this.segmentsArray.indexOf(this.segmentModel) - 1];
+      }
+    }
+
   }
+
 
 }

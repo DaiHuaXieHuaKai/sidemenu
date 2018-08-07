@@ -1,0 +1,57 @@
+page-modal-city {
+    .content {
+        height: 100%;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        .content_item {
+            height: 37.5rem;
+            width: 100%;
+            background: #fff;
+            position: absolute;
+            bottom: 0;
+            .item_header {
+                height: 4rem;
+                text-align: center;
+                color: #000;
+                font-size: 1.8rem;
+                line-height: 4rem;
+                ion-icon {
+                    position: absolute;
+                    font-size: 3rem;
+                    line-height: 4rem;
+                    right: 1rem;
+                }
+            }
+            .item_detail {
+                height: 3.5rem;
+                line-height: 3.5rem;
+                border-top: rgba(0, 0, 0, 0.1) solid .1rem;
+                border-bottom: rgba(0, 0, 0, 0.1) solid .1rem;
+                .item_btn {
+                    height: 3.5rem;
+                    line-height: 3.5rem;
+                    margin-left: 1rem;
+                    float: left;
+                }
+                .active_btn {
+                    color: red;
+                    border-bottom: red solid .2rem;
+                }
+            }
+            ion-scroll {
+                height: 30rem;
+                ion-list {
+                    margin: 0;
+                    border: none!important;
+                    ion-item {
+                        border: none!important;
+                        font-size: 1.4rem;
+                        .item-inner {
+                            border: none!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -13,18 +13,24 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 //设置标题栏背景颜色
-.toolbar-background-ios {
-    background: #b7ebf9;
-}
-
+// .toolbar-background-ios {
+//     background: #b7ebf9;
+// }
 //设置标题颜色
 .toolbar-title-ios {
-    color: #0b71a5;
+    color: #0b71a5!important;
 }
 
-//设置标题boder
-.header-ios .toolbar-ios:last-child .toolbar-background-ios {
-    border-width: 0;
+// //设置标题boder
+// .header-ios .toolbar-ios:last-child .toolbar-background-ios {
+//     border-width: 0;
+// }
+//设置item border
+ion-item {
+    border-bottom: #dddddd solid .1rem!important;
+    .item-inner {
+        border-bottom: none!important;
+    }
 }
 
 //设置placeholder颜色
@@ -104,4 +110,14 @@ input:-ms-input-placeholder {
 
 .ion-md-verify:before {
     content: '\e62c'
+}
+
+@import "../assets/animate";
+.custom-spinner-container {
+    background: transparent;
+}
+
+.custom-spinner-container img {
+    width: 64px;
+    height: 64px;
 }

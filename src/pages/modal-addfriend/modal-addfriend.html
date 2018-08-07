@@ -1,0 +1,23 @@
+<div class="content">
+    <div class="bg"></div>
+    <ion-row>
+        <img src="{{info.avatar}}" alt="">
+    </ion-row>
+    <ion-row>
+        {{info.nickname}}
+    </ion-row>
+    <ion-row>
+        {{info.city}}
+    </ion-row>
+    <ion-textarea [(ngModel)]="content" rows=3 placeholder="请输入验证信息...">
+
+    </ion-textarea>
+    <ion-row>
+        <ion-col text-center>
+            <button ion-button small full round color="four" (click)="close()">取消</button>
+        </ion-col>
+        <ion-col text-center>
+            <button ion-button small full round color="secondary" (click)="confirm()">发送</button>
+        </ion-col>
+    </ion-row>
+</div>
