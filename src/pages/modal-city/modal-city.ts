@@ -35,6 +35,7 @@ export class ModalCityPage {
     /* 如果没有省市区默认加载省份,否则根据省份和城市和区域查询出对应的数据 */
     if (this.provinceName && this.cityName && this.areaName) {
       this.util.post("/province/full", { province: this.provinceName, city: this.cityName, area: this.areaName }).then((result: any) => {
+        console.log(result)
         if (result.err == 0) {
           this.provinces = result.data.provinces;
           this.cities = result.data.cities;
@@ -45,6 +46,7 @@ export class ModalCityPage {
       })
     } else {
       this.util.get("/province/all").then((result: any) => {
+        console.log(result)
         if (result.err == 0) {
           this.provinces = result.data;
         }
